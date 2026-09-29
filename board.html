@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CM Tulba notes — subtopic highlighters</title>
+  <style>
+    :root {
+      --ink: #1c1916;
+      --muted: #5e584f;
+      --line: #e4ddd2;
+      --paper: #f7f4ee;
+      --card: #fffdf9;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font: 18px/1.5 "Segoe UI", Candara, sans-serif;
+    }
+    header {
+      background: #1e4d3a;
+      color: #f6f3ec;
+      padding: 22px 28px 18px;
+    }
+    header h1 {
+      margin: 0 0 4px;
+      font-family: Georgia, "Palatino Linotype", serif;
+      font-size: 30px;
+      font-weight: normal;
+    }
+    header p { margin: 0; max-width: 70ch; }
+    header .meta { margin-top: 8px; color: #d5e4db; font-size: 16px; }
+    main { max-width: 1180px; margin: 0 auto; padding: 22px 20px 64px; }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0 0 22px;
+    }
+    .zone {
+      min-height: 132px;
+      background: var(--card);
+      border: 2px dashed #d5cdc1;
+      border-radius: 12px;
+      padding: 10px;
+    }
+    .zone.tray { grid-column: 1 / -1; background: #fff8e8; }
+    @media (max-width: 900px) {
+      .board { grid-template-columns: 1fr 1fr; }
+    }
+    .zone.over { border-color: #1e4d3a; background: #e7f0eb; }
+    .zone h3 { margin: 0 0 8px; font-size: 16px; }
+    .zone .hint { margin: 0; color: var(--muted); font-size: 14px; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0 6px 6px 0;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: white;
+      cursor: grab;
+      font-size: 14px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .chip .pid { font-weight: 700; }
+    .pid-badge {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 999px;
+      padding: 2px 8px;
+    }
+    .note {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 22px;
+    }
+    .legend button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 999px;
+      padding: 4px 10px 4px 6px;
+      background: white;
+      cursor: pointer;
+      font: inherit;
+      font-size: 15px;
+    }
+    .swatch {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      flex: none;
+    }
+    section { margin: 0 0 22px; }
+    h2 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #1e4d3a;
+    }
+    article {
+      border-radius: 10px;
+      padding: 10px 14px 12px;
+      margin: 0 0 10px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    .label-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .label-row input {
+      flex: 1;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 650;
+      color: #3a332b;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid transparent;
+      border-radius: 6px;
+      padding: 4px 8px;
+    }
+    .label-row input:focus {
+      outline: none;
+      border-color: rgba(0, 0, 0, 0.25);
+      background: white;
+    }
+    .label-row button.dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid rgba(0, 0, 0, 0.18);
+      cursor: pointer;
+      padding: 0;
+    }
+    p.text {
+      margin: 0;
+      white-space: pre-wrap;
+      font-family: Georgia, "Palatino Linotype", serif;
+      font-size: 19px;
+      line-height: 1.45;
+    }
+    .toolbar { margin-top: 8px; }
+    .toolbar button {
+      font: inherit;
+      font-size: 15px;
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Meeting with CM Tulba</h1>
+    <p>12.8.25. Each note is tulba-01, tulba-02, and so on. Drag a tag into a bucket. Tags left in “Not placed” were not filed, because more than one bucket could fit.</p>
+    <p class="meta" id="meta"></p>
+  </header>
+  <main>
+    <div class="note">
+      Attendees: Min Bu, Noelle Cole, Dina Wong, Keith Matson (Consultant), CM Tulba, Marcia Tagavilla (Chief Of Staff, Office of CM Augie Tulba).
+    </div>
+    <div class="board" id="board"></div>
+    <div class="legend" id="legend"></div>
+    <div id="doc"></div>
+    <div class="toolbar">
+      <button id="reset" type="button">Reset labels, colors, and buckets</button>
+    </div>
+  </main>
+  <script>
+    const SOURCE = "CM Tulba DPP .docx";
+    const FAMILIES = {
+      infrastructure: { wash: "#fff3e8", ink: "#8a4b12", shades: ["#ffd7ad", "#ffc894", "#ffb878", "#ffe6cc"] },
+      "land-use": { wash: "#f6f0ff", ink: "#5b3d91", shades: ["#e3d4ff", "#d4c2fb", "#c9b6f6", "#efe6ff"] },
+      transport: { wash: "#eef5ff", ink: "#1d4e89", shades: ["#c5e0ff", "#adceff", "#96c0fb", "#dcecff"] },
+      econ: { wash: "#fff8e4", ink: "#8a6a10", shades: ["#ffe7a3", "#ffdc80", "#f5cf62", "#fff1c4"] },
+      sustainability: { wash: "#eefaf6", ink: "#0f6b5c", shades: ["#b7f0e2", "#97e6d4", "#7dd9c4", "#d2f8ef"] },
+      healthy: { wash: "#fff0f5", ink: "#8a3050", shades: ["#ffd0e0", "#ffbdd2", "#f7a8c2", "#ffe4ee"] },
+      cultural: { wash: "#fbf3ee", ink: "#7a4632", shades: ["#f0d2c2", "#e4c0ac", "#d9ad96", "#f8e4d8"] },
+      parks: { wash: "#f1faf0", ink: "#2d6b32", shades: ["#c6f0c0", "#aee6a6", "#96d98c", "#d8f6d4"] },
+      other: { wash: "#f4f4f6", ink: "#3d4454", shades: ["#d9dde8", "#c8cedc", "#b7c0d2", "#e6e9f0"] },
+      "": { wash: "#fff8e8", ink: "#5e584f", shades: ["#efeae2", "#e7e0d4", "#f6f1e8", "#e4ddd2"] }
+    };
+    const STORAGE_KEY = "tulba-buckets-v1";
+    const BUCKETS = [
+      { id: "infrastructure", label: "Infrastructure" },
+      { id: "land-use", label: "Land use urban form" },
+      { id: "transport", label: "Transport mobility" },
+      { id: "econ", label: "Econ business" },
+      { id: "sustainability", label: "Sustainability" },
+      { id: "healthy", label: "Healthy communities" },
+      { id: "cultural", label: "Cultural and historical resources" },
+      { id: "parks", label: "Parks and open space" },
+      { id: "other", label: "Other suggestions" }
+    ];
+    const START_BUCKET = {
+      "tulba-02": "transport",
+      "tulba-03": "transport",
+      "tulba-04": "transport",
+      "tulba-06": "transport",
+      "tulba-07": "sustainability",
+      "tulba-08": "infrastructure",
+      "tulba-09": "infrastructure",
+      "tulba-10": "parks",
+      "tulba-11": "parks",
+      "tulba-12": "parks",
+      "tulba-13": "parks",
+      "tulba-16": "sustainability",
+      "tulba-17": "econ",
+      "tulba-18": "transport",
+      "tulba-19": "transport",
+      "tulba-20": "healthy",
+      "tulba-21": "healthy",
+      "tulba-23": "econ",
+      "tulba-24": "econ",
+      "tulba-26": "land-use"
+    };
+
+    const SECTIONS = [
+      {
+        heading: "CM’s view of Ewa",
+        blocks: [
+          {
+            id: "b1",
+            subtopic: "CM’s view of Ewa",
+            text: "CM’s view of Ewa: Largely built out, Hoakalei, Gentry finished, new development in Hoopili. Ewa developed rapidly, 2013 plan has largely been built upon. Main planning challenges: traffic and safety, expanding and maintaining park and recreation, dealing with cesspool issues."
+          }
+        ]
+      },
+      {
+        heading: "Traffic",
+        blocks: [
+          { id: "b2", subtopic: "Getting to rail", text: "Getting to rail, multimodal transportation is not good." },
+          { id: "b3", subtopic: "Ft weaver road", text: "Ft weaver road is always congested. Want to get people off that road." },
+          { id: "b4", subtopic: "Ho‘opili road loading", text: "Kualakai / Kapolei Parkway / new Ho‘opili development: loading onto the road system." },
+          { id: "b5", subtopic: "E-bike safety", text: "Highlights e-bike safety: there have been 3–4 e-bike fatalities in his district, all victims were underage." },
+          { id: "b6", subtopic: "Kualakai Parkway", text: "Kualakai Parkway: high speed cars crashing into homes.Traffic calming: DTS consider road diets, changes lanes to bus only, narrowing Kapolei Parkway. Road diet for safety vs drivers getting angry about losing lanes." }
+        ]
+      },
+      {
+        heading: "Resiliency",
+        blocks: [
+          {
+            id: "b7",
+            subtopic: "Resiliency hub",
+            text: "Right now if a disaster happens, no one knows where to go, no facility. CM is Very interested in a resiliency hub concept. Reference to his prior experience in Kaʻū (Big Island), where a rec center acted as a hub during earthquakes, tsunamis. He suggested to use an existing or upgraded rec center (e.g., Mahiko or similar) as a hardened resiliency hub, with supplies and backup power."
+          }
+        ]
+      },
+      {
+        heading: "Cess Pool",
+        blocks: [
+          {
+            id: "b8",
+            subtopic: "Cesspool conversion",
+            text: "ENV manages cesspool conversion district, there are 932 homes with cess pool in Ewa beach. City will pay connection to lateral into the main sewer line. After system is active, property owners have 30 days to connect. After connection, homeowners begin paying a sewer bill. Some homeowners currently pay nothing for sewer and resist this plan because they don’t want a new bill. Not sure how much the monthly bill will be. There is the CARE? program that help needy family reduce the bill."
+          },
+          {
+            id: "b9",
+            subtopic: "Sewer connection",
+            text: "Senator Fevella wants to change the state law, that resident don’t have to connect to sewer. CM didn’t think he would be successful. Community can refused to connect, but CM believes City’s program is actually a good deal for residents."
+          }
+        ]
+      },
+      {
+        heading: "Parks",
+        blocks: [
+          {
+            id: "b10",
+            subtopic: "Fields",
+            text: "There’s Mahiko, Asing, and another park. Not enough fields, sports are year around now, parks never have time to heal. The community complaints fields are poorly maintained. DOE fields are often too expensive to rent, so league use concentrates on City fields."
+          },
+          {
+            id: "b11",
+            subtopic: "Sports",
+            text: "Baseball is a big thing here. Strong sports culture. Campbell HS football and girls flag football championships. Parks heavily used by local families and are central to community life."
+          },
+          {
+            id: "b12",
+            subtopic: "Gym and indoor space",
+            text: "Gym and indoor space: Only a few key indoor facilities (e.g., Mahiko gym, others), Many activities still outdoors. The community desires for more gym space and indoor facilities."
+          },
+          {
+            id: "b13",
+            subtopic: "No public pool",
+            text: "No public pool: There is no CCH pool in the district. Only private / restricted pools (Krocs center, private schools, resort communities). Ewa has the second highest rate in drowning incidents. CM mentioned there is a local nonprofit teaches kids swimming. Many children don’t have accessible swim instruction, raising safety concern. A child recently drowned from fishing."
+          }
+        ]
+      },
+      {
+        heading: "Puuloa Gun range and contamination",
+        blocks: [
+          {
+            id: "b14",
+            subtopic: "Puuloa gun range",
+            text: "Ewa community is mostly supportive of military. The gun range has been there for a long time. Some community members believe there are contaminants in soil and water want the military to clean it up and move the gun range."
+          }
+        ]
+      },
+      {
+        heading: "Kalaeloa, racetrack",
+        blocks: [
+          {
+            id: "b15",
+            subtopic: "Racetrack demand",
+            text: "Large tracts of land were transferred from the military. Community demands: Racetrack. Advocate: Li Cobian is a key figure wants a motorsports facility at Kalaeloa."
+          },
+          {
+            id: "b16",
+            subtopic: "PFAS and construction",
+            text: "CM thinks a racetrack could bring significant economic benefits, cites Las Vagas brings big revenues from F1 weekends. But the concerns is PFAS contamination in soil makes construction and grading complicated. You can’t dig, how do build? Need to ask DOH about it."
+          },
+          {
+            id: "b17",
+            subtopic: "Racetrack funding",
+            text: "Funding is unclear: advocates expect the City to pay for the racetrack facility. Past idea by Mufi to Use Kalaeloa Airport runway for racing."
+          }
+        ]
+      },
+      {
+        heading: "Road network, north road",
+        blocks: [
+          {
+            id: "b18",
+            subtopic: "North Road",
+            text: "North Road is partly owned by military, golf course, and City. Road is not up to current standards. Council initiated a reso to take over North Road. Golf course was reluctant to spend money to bring it to code. At one point suggested they might close access. CM Worried about emergency access if North Road is closed. Senator Fevella is involved."
+          },
+          {
+            id: "b19",
+            subtopic: "Old Renton Road",
+            text: "Old Renton Road, near Mahiko Park and other subdivisions could potentially connect to major roads (Kualakai Parkway)."
+          }
+        ]
+      },
+      {
+        heading: "Public safety services – Police, fire, EMS, substation",
+        blocks: [
+          {
+            id: "b20",
+            subtopic: "Police",
+            text: "Police: there are only 4 patrol officers covering the entire Ewa area. There is demand for a police substation in the district. Neighborhood watch patrol in the community."
+          },
+          {
+            id: "b21",
+            subtopic: "EMS",
+            text: "EMS (James Ireland) currently uses various locations to house its substation. The agency is currently doing a PIM of using Safeway land for emergency station, share with preschool. EMS has previously used Ewa village golf course space for EMS station."
+          },
+          {
+            id: "b22",
+            subtopic: "Fire and EMS facilities",
+            text: "There is a Fire station in Kapolei, not in Ewa side. There is a City-level task force examining whether EMS and Fire should merge. Development plans historically did not plan for EMS facilities, since EMS is a state-contracted service. Suggest EDP should identify EMS and emergency medical facilities similar to fire and police."
+          }
+        ]
+      },
+      {
+        heading: "Housing, jobs, and “Second City” role",
+        blocks: [
+          { id: "b23", subtopic: "Film facility", text: "New film facility in UH is in development process." },
+          {
+            id: "b24",
+            subtopic: "Jobs",
+            text: "Many people still drive in town to work live in Ewa, adding to traffic. Councilmember hopes for more jobs in Kapolei / Ewa (Second City) so people can live and work in the region."
+          },
+          {
+            id: "b25",
+            subtopic: "Residents",
+            text: "Many residents are local families getting their first home. Demographic has shifted from more rural / low-income perception to growing middle-class base. Emphasizes that Ewa community is strong: sports as central identity local teams and schools performing well."
+          },
+          {
+            id: "b26",
+            subtopic: "Shoreline development",
+            text: "Shoreline development: Oneula / Hoakalei New luxury housing going up. This area historically had significant homeless presence. Luxury homeowners will pressure for more enforcement and changes at the park and shoreline."
+          }
+        ]
+      },
+      {
+        heading: "Names and groups suggested for CAC",
+        blocks: [
+          {
+            id: "b27",
+            subtopic: "Suggested for CAC",
+            text: "John Roger, Alex Gaos, Mr. Pillman from NB 23\nSenator Kurt Fevella has deep knowledge of historical issues from first road built\nLi Cobian, racetrack proponent, very vocal\nEwa Villages HOA (Tesha Malama), they want to have a community center\nVerona Village Peter Savio. Verona village does not want to be with Ewa villages, but want a community center\nEwa Villages Homeowners Association: President Willy Gonzales\nEwa Villages Historical Society: Board members. Manager’s mansion would require too much money to develop it into something.\nResidents of West Loch senior housing: vocal, active, important for senior perspective on services, mobility, and safety."
+          }
+        ]
+      }
+    ];
+
+    (function numberItems() {
+      let n = 1;
+      SECTIONS.forEach(function (section) {
+        section.blocks.forEach(function (block) {
+          block.id = "tulba-" + String(n).padStart(2, "0");
+          n += 1;
+        });
+      });
+    })();
+
+    let labels = {};
+    let colors = {};
+    let placed = {};
+
+    function keyOf(name) {
+      return String(name || "").trim().toLowerCase();
+    }
+
+    function defaultLabels() {
+      const next = {};
+      SECTIONS.forEach(function (section) {
+        section.blocks.forEach(function (block) {
+          next[block.id] = block.subtopic;
+        });
+      });
+      return next;
+    }
+
+    function defaultPlaced() {
+      const next = {};
+      SECTIONS.forEach(function (section) {
+        section.blocks.forEach(function (block) {
+          next[block.id] = START_BUCKET[block.id] || "";
+        });
+      });
+      return next;
+    }
+
+    function load() {
+      labels = defaultLabels();
+      colors = {};
+      placed = defaultPlaced();
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+        if (saved && saved.labels) labels = Object.assign(labels, saved.labels);
+        if (saved && saved.colors) colors = saved.colors;
+        if (saved && saved.placed) placed = Object.assign(placed, saved.placed);
+      } catch (err) {
+        labels = defaultLabels();
+        colors = {};
+        placed = defaultPlaced();
+      }
+    }
+
+    function save() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ labels: labels, colors: colors, placed: placed }));
+    }
+
+    function bucketLabel(id) {
+      const found = BUCKETS.find(function (bucket) { return bucket.id === id; });
+      return found ? found.label : "Not placed";
+    }
+
+    function colorForBlock(block) {
+      const bucketId = placed[block.id] || "";
+      const family = FAMILIES[bucketId] || FAMILIES[""];
+      const mates = allBlocks().filter(function (item) {
+        return (placed[item.id] || "") === bucketId;
+      });
+      const index = mates.findIndex(function (item) { return item.id === block.id; });
+      return family.shades[Math.max(index, 0) % family.shades.length];
+    }
+
+    function allBlocks() {
+      const list = [];
+      SECTIONS.forEach(function (section) {
+        section.blocks.forEach(function (block) { list.push(block); });
+      });
+      return list;
+    }
+
+    function makeChip(block) {
+      const name = (labels[block.id] || "").trim() || "Untitled";
+      const chip = document.createElement("a");
+      chip.className = "chip";
+      chip.href = "#" + block.id;
+      chip.draggable = true;
+      chip.style.background = colorForBlock(block);
+      const pid = document.createElement("span");
+      pid.className = "pid";
+      pid.textContent = block.id;
+      chip.appendChild(pid);
+      chip.appendChild(document.createTextNode(name));
+      chip.addEventListener("dragstart", function (event) {
+        event.dataTransfer.setData("text/plain", block.id);
+        event.dataTransfer.effectAllowed = "move";
+      });
+      chip.addEventListener("click", function (event) {
+        if (chip.dataset.dragged === "1") {
+          event.preventDefault();
+          chip.dataset.dragged = "";
+        }
+      });
+      chip.addEventListener("dragend", function () {
+        chip.dataset.dragged = "1";
+      });
+      return chip;
+    }
+
+    function wireZone(zone, bucketId) {
+      zone.addEventListener("dragover", function (event) {
+        event.preventDefault();
+        zone.classList.add("over");
+      });
+      zone.addEventListener("dragleave", function () {
+        zone.classList.remove("over");
+      });
+      zone.addEventListener("drop", function (event) {
+        event.preventDefault();
+        zone.classList.remove("over");
+        const id = event.dataTransfer.getData("text/plain");
+        if (!id || !placed.hasOwnProperty(id)) return;
+        placed[id] = bucketId;
+        save();
+        render();
+      });
+    }
+
+    function renderBoard() {
+      const board = document.getElementById("board");
+      board.innerHTML = "";
+      const blocks = allBlocks();
+      const tray = document.createElement("div");
+      tray.className = "zone tray";
+      tray.dataset.bucket = "";
+      tray.style.background = FAMILIES[""].wash;
+      const trayTitle = document.createElement("h3");
+      trayTitle.textContent = "Not placed";
+      tray.appendChild(trayTitle);
+      const loose = blocks.filter(function (block) { return !placed[block.id]; });
+      if (!loose.length) {
+        const hint = document.createElement("p");
+        hint.className = "hint";
+        hint.textContent = "Drag a tag here to take it out of a bucket.";
+        tray.appendChild(hint);
+      }
+      loose.forEach(function (block) { tray.appendChild(makeChip(block)); });
+      wireZone(tray, "");
+      board.appendChild(tray);
+
+      BUCKETS.forEach(function (bucket) {
+        const zone = document.createElement("div");
+        zone.className = "zone";
+        zone.dataset.bucket = bucket.id;
+        const family = FAMILIES[bucket.id];
+        zone.style.background = family.wash;
+        zone.style.borderColor = family.shades[0];
+        const title = document.createElement("h3");
+        title.textContent = bucket.label;
+        title.style.color = family.ink;
+        zone.appendChild(title);
+        const inside = blocks.filter(function (block) { return placed[block.id] === bucket.id; });
+        if (!inside.length) {
+          const hint = document.createElement("p");
+          hint.className = "hint";
+          hint.textContent = "Drop tags here.";
+          zone.appendChild(hint);
+        }
+        inside.forEach(function (block) { zone.appendChild(makeChip(block)); });
+        wireZone(zone, bucket.id);
+        board.appendChild(zone);
+      });
+    }
+
+    function render() {
+      renderBoard();
+      const doc = document.getElementById("doc");
+      const legend = document.getElementById("legend");
+      doc.innerHTML = "";
+      legend.innerHTML = "";
+      const seen = [];
+
+      SECTIONS.forEach(function (section) {
+        const wrap = document.createElement("section");
+        const h2 = document.createElement("h2");
+        h2.textContent = section.heading;
+        wrap.appendChild(h2);
+        section.blocks.forEach(function (block) {
+          const name = labels[block.id] || "";
+          const color = colorForBlock(block);
+          const article = document.createElement("article");
+          article.id = block.id;
+          article.style.background = color;
+          const row = document.createElement("div");
+          row.className = "label-row";
+          const badge = document.createElement("span");
+          badge.className = "pid-badge";
+          badge.textContent = block.id;
+          row.appendChild(badge);
+          const input = document.createElement("input");
+          input.type = "text";
+          input.value = name;
+          input.setAttribute("aria-label", "Subtopic for this passage");
+          input.placeholder = "Enter a subtopic";
+          input.addEventListener("input", function () {
+            labels[block.id] = input.value;
+            save();
+            render();
+            const again = document.querySelector('[data-id="' + block.id + '"]');
+            if (again) {
+              again.focus();
+              again.setSelectionRange(again.value.length, again.value.length);
+            }
+          });
+          input.dataset.id = block.id;
+          const where = document.createElement("span");
+          where.className = "pid-badge";
+          where.textContent = bucketLabel(placed[block.id]);
+          row.appendChild(input);
+          row.appendChild(where);
+          const text = document.createElement("p");
+          text.className = "text";
+          text.textContent = block.text;
+          article.appendChild(row);
+          article.appendChild(text);
+          wrap.appendChild(article);
+          if (seen.indexOf(keyOf(name) || "untitled") === -1) seen.push(keyOf(name) || "untitled");
+        });
+        doc.appendChild(wrap);
+      });
+
+      const named = {};
+      SECTIONS.forEach(function (section) {
+        section.blocks.forEach(function (block) {
+          const name = (labels[block.id] || "").trim() || "Untitled";
+          named[keyOf(name) || "untitled"] = name;
+        });
+      });
+      Object.keys(named).forEach(function (key) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.title = "Jump to this subtopic";
+        const swatch = document.createElement("span");
+        swatch.className = "swatch";
+        const sample = allBlocks().find(function (block) {
+          return (keyOf(labels[block.id]) || "untitled") === key;
+        });
+        swatch.style.background = sample ? colorForBlock(sample) : FAMILIES[""].shades[0];
+        button.appendChild(swatch);
+        button.appendChild(document.createTextNode(named[key]));
+        button.addEventListener("click", function () {
+          const match = SECTIONS.reduce(function (found, section) {
+            return found || section.blocks.find(function (block) {
+              return (keyOf(labels[block.id]) || "untitled") === key;
+            });
+          }, null);
+          if (!match) return;
+          const el = document.querySelector('[data-id="' + match.id + '"]');
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+        });
+        legend.appendChild(button);
+      });
+    }
+
+    document.getElementById("meta").textContent = "Source file: notes/" + SOURCE;
+    document.getElementById("reset").addEventListener("click", function () {
+      if (!confirm("Reset subtopic names, colors, and bucket placement to the first pass?")) return;
+      localStorage.removeItem(STORAGE_KEY);
+      load();
+      render();
+    });
+
+    load();
+    render();
+  </script>
+</body>
+</html>

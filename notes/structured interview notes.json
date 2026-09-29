@@ -1,0 +1,1181 @@
+{
+  "meeting": {
+    "title": "Meeting with CM Tulba",
+    "date": "12.8.25",
+    "sourceFile": "CM Tulba DPP .docx",
+    "attendees": [
+      "Min Bu",
+      "Noelle Cole",
+      "Dina Wong",
+      "Keith Matson (Consultant)",
+      "CM Tulba",
+      "Marcia Tagavilla (Chief Of Staff, Office of CM Augie Tulba)"
+    ],
+    "notStructuredYet": [
+      "Kick-off Agency Meeting 11.7.25 notes .docx",
+      "Neighborhood Meeting_NB23_Alex Gaos John Roger DPP.docx",
+      "Neighborhood Meeting_NB23_J Clark_DPP.docx",
+      "OCCSR meeting 12.1.25 DPP Notes.docx"
+    ]
+  },
+  "fields": [
+    {
+      "key": "organization",
+      "label": "Organization"
+    },
+    {
+      "key": "type",
+      "label": "Type"
+    },
+    {
+      "key": "topic",
+      "label": "Topic"
+    },
+    {
+      "key": "subtopic",
+      "label": "Subtopic"
+    },
+    {
+      "key": "comment",
+      "label": "Comment / Finding"
+    },
+    {
+      "key": "position",
+      "label": "Position"
+    },
+    {
+      "key": "recommendation",
+      "label": "Recommendation"
+    },
+    {
+      "key": "geography",
+      "label": "Geography"
+    },
+    {
+      "key": "original",
+      "label": "Original statement"
+    }
+  ],
+  "passages": [
+    {
+      "id": "P1",
+      "heading": "CM’s view of Ewa",
+      "source": "CM’s view of Ewa: Largely built out, Hoakalei, Gentry finished, new development in Hoopili. Ewa developed rapidly, 2013 plan has largely been built upon. Main planning challenges: traffic and safety, expanding and maintaining park and recreation, dealing with cesspool issues.",
+      "rows": [
+        {
+          "organization": "Office of CM Augie Tulba",
+          "type": "",
+          "topic": "CM’s view of Ewa",
+          "subtopic": "",
+          "comment": "Largely built out, Hoakalei, Gentry finished, new development in Hoopili.",
+          "position": "",
+          "recommendation": "",
+          "geography": "Ewa; Hoakalei; Gentry; Hoopili",
+          "original": "CM’s view of Ewa: Largely built out, Hoakalei, Gentry finished, new development in Hoopili.",
+          "check": "Organization comes from the words “CM’s view” and the attendee line “Office of CM Augie Tulba.” Gentry is listed in Geography because it is named. The notes do not say whether Gentry is a place, a project, or a developer.",
+          "id": "T-01",
+          "passageId": "P1"
+        },
+        {
+          "organization": "Office of CM Augie Tulba",
+          "type": "",
+          "topic": "CM’s view of Ewa",
+          "subtopic": "",
+          "comment": "Ewa developed rapidly, 2013 plan has largely been built upon.",
+          "position": "",
+          "recommendation": "",
+          "geography": "Ewa",
+          "original": "Ewa developed rapidly, 2013 plan has largely been built upon.",
+          "check": "The 2013 plan is not named. Organization is carried from “CM’s view” at the start of this passage.",
+          "id": "T-02",
+          "passageId": "P1"
+        },
+        {
+          "organization": "Office of CM Augie Tulba",
+          "type": "",
+          "topic": "CM’s view of Ewa",
+          "subtopic": "Main planning challenges",
+          "comment": "Main planning challenges: traffic and safety, expanding and maintaining park and recreation, dealing with cesspool issues.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "Main planning challenges: traffic and safety, expanding and maintaining park and recreation, dealing with cesspool issues.",
+          "check": "Coded as a list of challenges, not as a recommendation or a ranking. This sentence does not name a place.",
+          "id": "T-03",
+          "passageId": "P1"
+        }
+      ]
+    },
+    {
+      "id": "P2",
+      "heading": "Traffic",
+      "source": "Getting to rail, multimodal transportation is not good.\nFt weaver road is always congested. Want to get people off that road.\nKualakai / Kapolei Parkway / new Ho‘opili development: loading onto the road system.",
+      "rows": [
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Traffic",
+          "subtopic": "",
+          "comment": "Getting to rail, multimodal transportation is not good.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "Getting to rail, multimodal transportation is not good.",
+          "check": "Does not say who is speaking, which rail, or which place.",
+          "id": "T-04",
+          "passageId": "P2"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Traffic",
+          "subtopic": "",
+          "comment": "Ft weaver road is always congested.",
+          "position": "",
+          "recommendation": "Want to get people off that road.",
+          "geography": "Ft weaver road",
+          "original": "Ft weaver road is always congested. Want to get people off that road.",
+          "check": "Does not say who wants people off the road, or how. Spelling follows the notes: “Ft weaver road.”",
+          "id": "T-05",
+          "passageId": "P2"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Traffic",
+          "subtopic": "",
+          "comment": "Kualakai / Kapolei Parkway / new Ho‘opili development: loading onto the road system.",
+          "position": "",
+          "recommendation": "",
+          "geography": "Kualakai; Kapolei Parkway; Ho‘opili",
+          "original": "Kualakai / Kapolei Parkway / new Ho‘opili development: loading onto the road system.",
+          "check": "The colon does not say which of these is loading onto the road system.",
+          "id": "T-06",
+          "passageId": "P2"
+        }
+      ]
+    },
+    {
+      "id": "P3",
+      "heading": "Traffic — e-bike safety",
+      "source": "Highlights e-bike safety: there have been 3–4 e-bike fatalities in his district, all victims were underage.",
+      "rows": [
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Traffic",
+          "subtopic": "e-bike safety",
+          "comment": "There have been 3–4 e-bike fatalities in his district, all victims were underage.",
+          "position": "",
+          "recommendation": "",
+          "geography": "his district",
+          "original": "Highlights e-bike safety: there have been 3–4 e-bike fatalities in his district, all victims were underage.",
+          "check": "Does not say who highlights this. The district is not named. No time period is stated.",
+          "id": "T-07",
+          "passageId": "P3"
+        }
+      ]
+    },
+    {
+      "id": "P4",
+      "heading": "Traffic — Kualakai Parkway and traffic calming",
+      "source": "Kualakai Parkway: high speed cars crashing into homes.Traffic calming: DTS consider road diets, changes lanes to bus only, narrowing Kapolei Parkway. Road diet for safety vs drivers getting angry about losing lanes.",
+      "rows": [
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Traffic",
+          "subtopic": "Kualakai Parkway",
+          "comment": "High speed cars crashing into homes.",
+          "position": "",
+          "recommendation": "",
+          "geography": "Kualakai Parkway",
+          "original": "Kualakai Parkway: high speed cars crashing into homes.",
+          "check": "The source has no space before the next sentence (“homes.Traffic”).",
+          "id": "T-08",
+          "passageId": "P4"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Traffic",
+          "subtopic": "Traffic calming",
+          "comment": "",
+          "position": "",
+          "recommendation": "DTS consider road diets, changes lanes to bus only, narrowing Kapolei Parkway.",
+          "geography": "Kapolei Parkway",
+          "original": "Traffic calming: DTS consider road diets, changes lanes to bus only, narrowing Kapolei Parkway.",
+          "check": "Only “narrowing” is tied to Kapolei Parkway. The notes do not say which road a road diet or bus-only lanes would apply to. Not combined with the Kualakai Parkway sentence.",
+          "id": "T-09",
+          "passageId": "P4"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Traffic",
+          "subtopic": "Road diet",
+          "comment": "Road diet for safety vs drivers getting angry about losing lanes.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "Road diet for safety vs drivers getting angry about losing lanes.",
+          "check": "Does not say who is angry, or which side anyone is on. No road is named in this sentence.",
+          "id": "T-10",
+          "passageId": "P4"
+        }
+      ]
+    },
+    {
+      "id": "P5",
+      "heading": "Resiliency",
+      "source": "Right now if a disaster happens, no one knows where to go, no facility. CM is Very interested in a resiliency hub concept. Reference to his prior experience in Kaʻū (Big Island), where a rec center acted as a hub during earthquakes, tsunamis. He suggested to use an existing or upgraded rec center (e.g., Mahiko or similar) as a hardened resiliency hub, with supplies and backup power.",
+      "rows": [
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Resiliency",
+          "subtopic": "",
+          "comment": "Right now if a disaster happens, no one knows where to go, no facility.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "Right now if a disaster happens, no one knows where to go, no facility.",
+          "check": "This sentence does not name a place.",
+          "id": "T-11",
+          "passageId": "P5"
+        },
+        {
+          "organization": "Office of CM Augie Tulba",
+          "type": "",
+          "topic": "Resiliency",
+          "subtopic": "Resiliency hub",
+          "comment": "",
+          "position": "Very interested in a resiliency hub concept.",
+          "recommendation": "",
+          "geography": "",
+          "original": "CM is Very interested in a resiliency hub concept.",
+          "check": "No place is named.",
+          "id": "T-12",
+          "passageId": "P5"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Resiliency",
+          "subtopic": "Resiliency hub",
+          "comment": "A rec center acted as a hub during earthquakes, tsunamis.",
+          "position": "",
+          "recommendation": "",
+          "geography": "Kaʻū (Big Island)",
+          "original": "Reference to his prior experience in Kaʻū (Big Island), where a rec center acted as a hub during earthquakes, tsunamis.",
+          "check": "This is prior experience somewhere else. It is not a statement about Ewa. “His” follows sentences about CM Tulba. The rec center is not named.",
+          "id": "T-13",
+          "passageId": "P5"
+        },
+        {
+          "organization": "Office of CM Augie Tulba",
+          "type": "",
+          "topic": "Resiliency",
+          "subtopic": "Resiliency hub",
+          "comment": "",
+          "position": "",
+          "recommendation": "Use an existing or upgraded rec center (e.g., Mahiko or similar) as a hardened resiliency hub, with supplies and backup power.",
+          "geography": "Mahiko",
+          "original": "He suggested to use an existing or upgraded rec center (e.g., Mahiko or similar) as a hardened resiliency hub, with supplies and backup power.",
+          "check": "“He” is read as CM Tulba from the earlier sentence in this passage. Mahiko is an example (“or similar”), not a chosen site.",
+          "id": "T-14",
+          "passageId": "P5"
+        }
+      ]
+    },
+    {
+      "id": "P6",
+      "heading": "Cess Pool",
+      "source": "ENV manages cesspool conversion district, there are 932 homes with cess pool in Ewa beach. City will pay connection to lateral into the main sewer line. After system is active, property owners have 30 days to connect. After connection, homeowners begin paying a sewer bill. Some homeowners currently pay nothing for sewer and resist this plan because they don’t want a new bill. Not sure how much the monthly bill will be. There is the CARE? program that help needy family reduce the bill.",
+      "rows": [
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Cess Pool",
+          "subtopic": "",
+          "comment": "ENV manages cesspool conversion district, there are 932 homes with cess pool in Ewa beach. City will pay connection to lateral into the main sewer line. After system is active, property owners have 30 days to connect. After connection, homeowners begin paying a sewer bill.",
+          "position": "",
+          "recommendation": "",
+          "geography": "Ewa beach",
+          "original": "ENV manages cesspool conversion district, there are 932 homes with cess pool in Ewa beach. City will pay connection to lateral into the main sewer line. After system is active, property owners have 30 days to connect. After connection, homeowners begin paying a sewer bill.",
+          "check": "ENV is named as managing the district. ENV is not coded as Organization, because the notes do not say ENV is the speaker. These four sentences are kept as one program description.",
+          "id": "T-15",
+          "passageId": "P6"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Cess Pool",
+          "subtopic": "",
+          "comment": "Some homeowners currently pay nothing for sewer. Not sure how much the monthly bill will be.",
+          "position": "Some homeowners resist this plan because they don’t want a new bill.",
+          "recommendation": "",
+          "geography": "",
+          "original": "Some homeowners currently pay nothing for sewer and resist this plan because they don’t want a new bill. Not sure how much the monthly bill will be.",
+          "check": "Homeowners are not coded as an organization. Who is “not sure” is not stated. Place is not restated in these sentences.",
+          "id": "T-16",
+          "passageId": "P6"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Cess Pool",
+          "subtopic": "",
+          "comment": "There is the CARE? program that help needy family reduce the bill.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "There is the CARE? program that help needy family reduce the bill.",
+          "check": "The question mark after CARE is in the source. The program name is not confirmed beyond that.",
+          "id": "T-17",
+          "passageId": "P6"
+        }
+      ]
+    },
+    {
+      "id": "P7",
+      "heading": "Cess Pool — connection and Senator Fevella",
+      "source": "Senator Fevella wants to change the state law, that resident don’t have to connect to sewer. CM didn’t think he would be successful. Community can refused to connect, but CM believes City’s program is actually a good deal for residents.",
+      "rows": [
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Cess Pool",
+          "subtopic": "",
+          "comment": "",
+          "position": "Senator Fevella wants to change the state law, that resident don’t have to connect to sewer.",
+          "recommendation": "",
+          "geography": "",
+          "original": "Senator Fevella wants to change the state law, that resident don’t have to connect to sewer.",
+          "check": "Told in the CM Tulba meeting, not a separate interview with the senator. A later bullet says “Senator Kurt Fevella.” Same last name; the two lines are not merged.",
+          "id": "T-18",
+          "passageId": "P7"
+        },
+        {
+          "organization": "Office of CM Augie Tulba",
+          "type": "",
+          "topic": "Cess Pool",
+          "subtopic": "",
+          "comment": "",
+          "position": "Didn’t think he would be successful.",
+          "recommendation": "",
+          "geography": "",
+          "original": "CM didn’t think he would be successful.",
+          "check": "“He” is read as Senator Fevella from the previous sentence.",
+          "id": "T-19",
+          "passageId": "P7"
+        },
+        {
+          "organization": "Office of CM Augie Tulba",
+          "type": "",
+          "topic": "Cess Pool",
+          "subtopic": "",
+          "comment": "Community can refused to connect.",
+          "position": "CM believes City’s program is actually a good deal for residents.",
+          "recommendation": "",
+          "geography": "",
+          "original": "Community can refused to connect, but CM believes City’s program is actually a good deal for residents.",
+          "check": "Source says “can refused.” It is not corrected.",
+          "id": "T-20",
+          "passageId": "P7"
+        }
+      ]
+    },
+    {
+      "id": "P8",
+      "heading": "Parks — fields",
+      "source": "There’s Mahiko, Asing, and another park. Not enough fields, sports are year around now, parks never have time to heal. The community complaints fields are poorly maintained. DOE fields are often too expensive to rent, so league use concentrates on City fields.",
+      "rows": [
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Parks",
+          "subtopic": "",
+          "comment": "There’s Mahiko, Asing, and another park.",
+          "position": "",
+          "recommendation": "",
+          "geography": "Mahiko; Asing",
+          "original": "There’s Mahiko, Asing, and another park.",
+          "check": "“Another park” is not named, so it has no geography entry. Asing is not given a longer name than the notes use.",
+          "id": "T-21",
+          "passageId": "P8"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Parks",
+          "subtopic": "",
+          "comment": "Not enough fields, sports are year around now, parks never have time to heal.",
+          "position": "The community complaints fields are poorly maintained.",
+          "recommendation": "",
+          "geography": "",
+          "original": "Not enough fields, sports are year around now, parks never have time to heal. The community complaints fields are poorly maintained.",
+          "check": "“Complaints” is kept as written. Who in the community is not named. No place is named in these sentences.",
+          "id": "T-22",
+          "passageId": "P8"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Parks",
+          "subtopic": "",
+          "comment": "DOE fields are often too expensive to rent, so league use concentrates on City fields.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "DOE fields are often too expensive to rent, so league use concentrates on City fields.",
+          "check": "DOE is part of the finding. DOE is not coded as Organization.",
+          "id": "T-23",
+          "passageId": "P8"
+        }
+      ]
+    },
+    {
+      "id": "P9",
+      "heading": "Parks — sports",
+      "source": "Baseball is a big thing here. Strong sports culture. Campbell HS football and girls flag football championships. Parks heavily used by local families and are central to community life.",
+      "rows": [
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Parks",
+          "subtopic": "",
+          "comment": "Baseball is a big thing here. Strong sports culture. Campbell HS football and girls flag football championships. Parks heavily used by local families and are central to community life.",
+          "position": "",
+          "recommendation": "",
+          "geography": "Campbell HS",
+          "original": "Baseball is a big thing here. Strong sports culture. Campbell HS football and girls flag football championships. Parks heavily used by local families and are central to community life.",
+          "check": "Kept as one point because the notes present it as one passage. “Here” is not named. Championship year and level are not stated.",
+          "id": "T-24",
+          "passageId": "P9"
+        }
+      ]
+    },
+    {
+      "id": "P10",
+      "heading": "Parks — gym and indoor space",
+      "source": "Gym and indoor space: Only a few key indoor facilities (e.g., Mahiko gym, others), Many activities still outdoors. The community desires for more gym space and indoor facilities.",
+      "rows": [
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Parks",
+          "subtopic": "Gym and indoor space",
+          "comment": "Only a few key indoor facilities (e.g., Mahiko gym, others). Many activities still outdoors.",
+          "position": "The community desires for more gym space and indoor facilities.",
+          "recommendation": "",
+          "geography": "Mahiko gym",
+          "original": "Gym and indoor space: Only a few key indoor facilities (e.g., Mahiko gym, others), Many activities still outdoors. The community desires for more gym space and indoor facilities.",
+          "check": "“Others” are not named. The desire is coded as Position, not Recommendation, because no proposed action is stated.",
+          "id": "T-25",
+          "passageId": "P10"
+        }
+      ]
+    },
+    {
+      "id": "P11",
+      "heading": "Parks — no public pool",
+      "source": "No public pool: There is no CCH pool in the district. Only private / restricted pools (Krocs center, private schools, resort communities). Ewa has the second highest rate in drowning incidents. CM mentioned there is a local nonprofit teaches kids swimming. Many children don’t have accessible swim instruction, raising safety concern. A child recently drowned from fishing.",
+      "rows": [
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Parks",
+          "subtopic": "No public pool",
+          "comment": "There is no CCH pool in the district. Only private / restricted pools (Krocs center, private schools, resort communities).",
+          "position": "",
+          "recommendation": "",
+          "geography": "Krocs center",
+          "original": "No public pool: There is no CCH pool in the district. Only private / restricted pools (Krocs center, private schools, resort communities).",
+          "check": "“The district” is not named. Private schools and resort communities are not named as specific places. “Krocs” and “CCH” are not spelled out.",
+          "id": "T-26",
+          "passageId": "P11"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Parks",
+          "subtopic": "No public pool",
+          "comment": "Ewa has the second highest rate in drowning incidents.",
+          "position": "",
+          "recommendation": "",
+          "geography": "Ewa",
+          "original": "Ewa has the second highest rate in drowning incidents.",
+          "check": "Does not say second highest among which places, or for which period.",
+          "id": "T-27",
+          "passageId": "P11"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Parks",
+          "subtopic": "No public pool",
+          "comment": "CM mentioned there is a local nonprofit teaches kids swimming. Many children don’t have accessible swim instruction, raising safety concern.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "CM mentioned there is a local nonprofit teaches kids swimming. Many children don’t have accessible swim instruction, raising safety concern.",
+          "check": "The nonprofit is not named. Organization is blank because the second sentence does not say who is raising the safety concern.",
+          "id": "T-28",
+          "passageId": "P11"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Parks",
+          "subtopic": "No public pool",
+          "comment": "A child recently drowned from fishing.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "A child recently drowned from fishing.",
+          "check": "Place, date, and name are not stated. Not linked to the drowning-rate sentence.",
+          "id": "T-29",
+          "passageId": "P11"
+        }
+      ]
+    },
+    {
+      "id": "P12",
+      "heading": "Puuloa Gun range and contamination",
+      "source": "Ewa community is mostly supportive of military. The gun range has been there for a long time. Some community members believe there are contaminants in soil and water want the military to clean it up and move the gun range.",
+      "rows": [
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Puuloa Gun range and contamination",
+          "subtopic": "",
+          "comment": "",
+          "position": "Ewa community is mostly supportive of military.",
+          "recommendation": "",
+          "geography": "Ewa",
+          "original": "Ewa community is mostly supportive of military.",
+          "check": "This sentence does not mention the gun range. Topic is the section heading. “Mostly” is not explained.",
+          "id": "T-30",
+          "passageId": "P12"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Puuloa Gun range and contamination",
+          "subtopic": "",
+          "comment": "The gun range has been there for a long time.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "The gun range has been there for a long time.",
+          "check": "The gun range is not named in the sentence. The section heading is “Puuloa Gun range and contamination.” Puuloa was not copied into Geography.",
+          "id": "T-31",
+          "passageId": "P12"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Puuloa Gun range and contamination",
+          "subtopic": "",
+          "comment": "Some community members believe there are contaminants in soil and water.",
+          "position": "",
+          "recommendation": "Want the military to clean it up and move the gun range.",
+          "geography": "",
+          "original": "Some community members believe there are contaminants in soil and water want the military to clean it up and move the gun range.",
+          "check": "Attributed to “some community members,” not to CM Tulba. No organization is named. The sentence has no comma between “water” and “want.” Place name is only in the section heading.",
+          "id": "T-32",
+          "passageId": "P12"
+        }
+      ]
+    },
+    {
+      "id": "P13",
+      "heading": "Kalaeloa, racetrack — land and advocate",
+      "source": "Large tracts of land were transferred from the military. Community demands: Racetrack. Advocate: Li Cobian is a key figure wants a motorsports facility at Kalaeloa.",
+      "rows": [
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Kalaeloa, racetrack",
+          "subtopic": "",
+          "comment": "Large tracts of land were transferred from the military.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "Large tracts of land were transferred from the military.",
+          "check": "Does not say which tracts, when, or to whom. Kalaeloa is in the section heading, not in this sentence, so it is not in Geography.",
+          "id": "T-33",
+          "passageId": "P13"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Kalaeloa, racetrack",
+          "subtopic": "",
+          "comment": "",
+          "position": "Community demands: Racetrack.",
+          "recommendation": "",
+          "geography": "",
+          "original": "Community demands: Racetrack.",
+          "check": "Does not say which community. Location is not in this fragment. Section heading is “Kalaeloa, racetrack.”",
+          "id": "T-34",
+          "passageId": "P13"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Kalaeloa, racetrack",
+          "subtopic": "",
+          "comment": "Li Cobian is a key figure.",
+          "position": "Wants a motorsports facility at Kalaeloa.",
+          "recommendation": "",
+          "geography": "Kalaeloa",
+          "original": "Advocate: Li Cobian is a key figure wants a motorsports facility at Kalaeloa.",
+          "check": "No organization is named for Li Cobian. The line calls this person an advocate. A later CAC bullet about Li Cobian is a separate row.",
+          "id": "T-35",
+          "passageId": "P13"
+        }
+      ]
+    },
+    {
+      "id": "P14",
+      "heading": "Kalaeloa, racetrack — benefits, PFAS, funding, past idea",
+      "source": "CM thinks a racetrack could bring significant economic benefits, cites Las Vagas brings big revenues from F1 weekends. But the concerns is PFAS contamination in soil makes construction and grading complicated. You can’t dig, how do build? Need to ask DOH about it.\nFunding is unclear: advocates expect the City to pay for the racetrack facility. Past idea by Mufi to Use Kalaeloa Airport runway for racing.",
+      "rows": [
+        {
+          "organization": "Office of CM Augie Tulba",
+          "type": "",
+          "topic": "Kalaeloa, racetrack",
+          "subtopic": "",
+          "comment": "Cites Las Vagas brings big revenues from F1 weekends.",
+          "position": "A racetrack could bring significant economic benefits.",
+          "recommendation": "",
+          "geography": "",
+          "original": "CM thinks a racetrack could bring significant economic benefits, cites Las Vagas brings big revenues from F1 weekends.",
+          "check": "“Las Vagas” is spelled as in the notes and is not coded as the project location. The racetrack location is not restated in this sentence.",
+          "id": "T-36",
+          "passageId": "P14"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Kalaeloa, racetrack",
+          "subtopic": "",
+          "comment": "The concerns is PFAS contamination in soil makes construction and grading complicated. You can’t dig, how do build?",
+          "position": "",
+          "recommendation": "Need to ask DOH about it.",
+          "geography": "",
+          "original": "But the concerns is PFAS contamination in soil makes construction and grading complicated. You can’t dig, how do build? Need to ask DOH about it.",
+          "check": "Who should ask DOH is not named. “It” is not defined beyond these sentences. Place is not restated. Wording “the concerns is” and “how do build” is kept. Not attributed to CM, because these sentences do not name him.",
+          "id": "T-37",
+          "passageId": "P14"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Kalaeloa, racetrack",
+          "subtopic": "",
+          "comment": "Funding is unclear.",
+          "position": "Advocates expect the City to pay for the racetrack facility.",
+          "recommendation": "",
+          "geography": "",
+          "original": "Funding is unclear: advocates expect the City to pay for the racetrack facility.",
+          "check": "Advocates are not named. The expectation is coded as Position, not as the City’s recommendation.",
+          "id": "T-38",
+          "passageId": "P14"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Kalaeloa, racetrack",
+          "subtopic": "",
+          "comment": "Past idea by Mufi to Use Kalaeloa Airport runway for racing.",
+          "position": "",
+          "recommendation": "",
+          "geography": "Kalaeloa Airport runway",
+          "original": "Past idea by Mufi to Use Kalaeloa Airport runway for racing.",
+          "check": "Full name is not in the notes. Coded as a past idea, not as a current proposal. Capitalization of “Use” follows the source.",
+          "id": "T-39",
+          "passageId": "P14"
+        }
+      ]
+    },
+    {
+      "id": "P15",
+      "heading": "Road network, north road",
+      "source": "North Road is partly owned by military, golf course, and City. Road is not up to current standards. Council initiated a reso to take over North Road. Golf course was reluctant to spend money to bring it to code. At one point suggested they might close access. CM Worried about emergency access if North Road is closed. Senator Fevella is involved.\nOld Renton Road, near Mahiko Park and other subdivisions could potentially connect to major roads (Kualakai Parkway).",
+      "rows": [
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Road network, north road",
+          "subtopic": "North Road",
+          "comment": "North Road is partly owned by military, golf course, and City. Road is not up to current standards.",
+          "position": "",
+          "recommendation": "",
+          "geography": "North Road",
+          "original": "North Road is partly owned by military, golf course, and City. Road is not up to current standards.",
+          "check": "The golf course is not named. “Road” in the second sentence is read as North Road.",
+          "id": "T-40",
+          "passageId": "P15"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Road network, north road",
+          "subtopic": "North Road",
+          "comment": "Council initiated a reso to take over North Road.",
+          "position": "",
+          "recommendation": "",
+          "geography": "North Road",
+          "original": "Council initiated a reso to take over North Road.",
+          "check": "Resolution number, date, and result are not stated. “reso” is left as written.",
+          "id": "T-41",
+          "passageId": "P15"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Road network, north road",
+          "subtopic": "North Road",
+          "comment": "At one point suggested they might close access.",
+          "position": "Golf course was reluctant to spend money to bring it to code.",
+          "recommendation": "",
+          "geography": "",
+          "original": "Golf course was reluctant to spend money to bring it to code. At one point suggested they might close access.",
+          "check": "The golf course is not named. Who suggested closing access is not stated. “They” and “it” are not defined in these two sentences.",
+          "id": "T-42",
+          "passageId": "P15"
+        },
+        {
+          "organization": "Office of CM Augie Tulba",
+          "type": "",
+          "topic": "Road network, north road",
+          "subtopic": "North Road",
+          "comment": "",
+          "position": "Worried about emergency access if North Road is closed.",
+          "recommendation": "",
+          "geography": "North Road",
+          "original": "CM Worried about emergency access if North Road is closed.",
+          "check": "",
+          "id": "T-43",
+          "passageId": "P15"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Road network, north road",
+          "subtopic": "North Road",
+          "comment": "Senator Fevella is involved.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "Senator Fevella is involved.",
+          "check": "Does not say involved in what. Not merged with the later “Senator Kurt Fevella” bullet.",
+          "id": "T-44",
+          "passageId": "P15"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Road network, north road",
+          "subtopic": "Old Renton Road",
+          "comment": "Old Renton Road, near Mahiko Park and other subdivisions could potentially connect to major roads (Kualakai Parkway).",
+          "position": "",
+          "recommendation": "",
+          "geography": "Old Renton Road; Mahiko Park; Kualakai Parkway",
+          "original": "Old Renton Road, near Mahiko Park and other subdivisions could potentially connect to major roads (Kualakai Parkway).",
+          "check": "“Could potentially” is not coded as a recommendation. “Other subdivisions” are not named.",
+          "id": "T-45",
+          "passageId": "P15"
+        }
+      ]
+    },
+    {
+      "id": "P16",
+      "heading": "Public safety — police",
+      "source": "Police: there are only 4 patrol officers covering the entire Ewa area. There is demand for a police substation in the district. Neighborhood watch patrol in the community.",
+      "rows": [
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Public safety services – Police, fire, EMS, substation",
+          "subtopic": "Police",
+          "comment": "There are only 4 patrol officers covering the entire Ewa area.",
+          "position": "",
+          "recommendation": "",
+          "geography": "Ewa area",
+          "original": "Police: there are only 4 patrol officers covering the entire Ewa area.",
+          "check": "",
+          "id": "T-46",
+          "passageId": "P16"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Public safety services – Police, fire, EMS, substation",
+          "subtopic": "Police",
+          "comment": "There is demand for a police substation in the district.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "There is demand for a police substation in the district.",
+          "check": "Who wants the substation is not stated, so this is not coded as Position or Recommendation. “The district” is not named.",
+          "id": "T-47",
+          "passageId": "P16"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Public safety services – Police, fire, EMS, substation",
+          "subtopic": "Police",
+          "comment": "Neighborhood watch patrol in the community.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "Neighborhood watch patrol in the community.",
+          "check": "The fragment does not say whether this exists, is being requested, or is a contact.",
+          "id": "T-48",
+          "passageId": "P16"
+        }
+      ]
+    },
+    {
+      "id": "P17",
+      "heading": "Public safety — EMS",
+      "source": "EMS (James Ireland) currently uses various locations to house its substation. The agency is currently doing a PIM of using Safeway land for emergency station, share with preschool. EMS has previously used Ewa village golf course space for EMS station.",
+      "rows": [
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Public safety services – Police, fire, EMS, substation",
+          "subtopic": "EMS",
+          "comment": "EMS (James Ireland) currently uses various locations to house its substation.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "EMS (James Ireland) currently uses various locations to house its substation.",
+          "check": "Does not say whether James Ireland is a person, a title, or a facility. The locations are not named.",
+          "id": "T-49",
+          "passageId": "P17"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Public safety services – Police, fire, EMS, substation",
+          "subtopic": "EMS",
+          "comment": "The agency is currently doing a PIM of using Safeway land for emergency station, share with preschool.",
+          "position": "",
+          "recommendation": "",
+          "geography": "Safeway land",
+          "original": "The agency is currently doing a PIM of using Safeway land for emergency station, share with preschool.",
+          "check": "PIM is not defined. “The agency” is not named in this sentence. The preschool is not named. “Share with preschool” is not rewritten.",
+          "id": "T-50",
+          "passageId": "P17"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Public safety services – Police, fire, EMS, substation",
+          "subtopic": "EMS",
+          "comment": "EMS has previously used Ewa village golf course space for EMS station.",
+          "position": "",
+          "recommendation": "",
+          "geography": "Ewa village golf course",
+          "original": "EMS has previously used Ewa village golf course space for EMS station.",
+          "check": "“Ewa village” is capitalized as written. Not matched to the later Ewa Villages rows.",
+          "id": "T-51",
+          "passageId": "P17"
+        }
+      ]
+    },
+    {
+      "id": "P18",
+      "heading": "Public safety — fire, task force, EDP",
+      "source": "There is a Fire station in Kapolei, not in Ewa side. There is a City-level task force examining whether EMS and Fire should merge. Development plans historically did not plan for EMS facilities, since EMS is a state-contracted service. Suggest EDP should identify EMS and emergency medical facilities similar to fire and police.",
+      "rows": [
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Public safety services – Police, fire, EMS, substation",
+          "subtopic": "Fire",
+          "comment": "There is a Fire station in Kapolei, not in Ewa side.",
+          "position": "",
+          "recommendation": "",
+          "geography": "Kapolei; Ewa side",
+          "original": "There is a Fire station in Kapolei, not in Ewa side.",
+          "check": "",
+          "id": "T-52",
+          "passageId": "P18"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Public safety services – Police, fire, EMS, substation",
+          "subtopic": "",
+          "comment": "There is a City-level task force examining whether EMS and Fire should merge.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "There is a City-level task force examining whether EMS and Fire should merge.",
+          "check": "The task force is not named.",
+          "id": "T-53",
+          "passageId": "P18"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Public safety services – Police, fire, EMS, substation",
+          "subtopic": "EMS",
+          "comment": "Development plans historically did not plan for EMS facilities, since EMS is a state-contracted service.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "Development plans historically did not plan for EMS facilities, since EMS is a state-contracted service.",
+          "check": "Which development plans are not named.",
+          "id": "T-54",
+          "passageId": "P18"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Public safety services – Police, fire, EMS, substation",
+          "subtopic": "EMS",
+          "comment": "",
+          "position": "",
+          "recommendation": "EDP should identify EMS and emergency medical facilities similar to fire and police.",
+          "geography": "",
+          "original": "Suggest EDP should identify EMS and emergency medical facilities similar to fire and police.",
+          "check": "“Suggest” has no subject. Not attributed to CM Tulba or anyone else. EDP is not spelled out.",
+          "id": "T-55",
+          "passageId": "P18"
+        }
+      ]
+    },
+    {
+      "id": "P19",
+      "heading": "Housing, jobs, and “Second City” role",
+      "source": "New film facility in UH is in development process.\nMany people still drive in town to work live in Ewa, adding to traffic. Councilmember hopes for more jobs in Kapolei / Ewa (Second City) so people can live and work in the region.\nMany residents are local families getting their first home. Demographic has shifted from more rural / low-income perception to growing middle-class base. Emphasizes that Ewa community is strong: sports as central identity local teams and schools performing well.\nShoreline development: Oneula / Hoakalei New luxury housing going up. This area historically had significant homeless presence. Luxury homeowners will pressure for more enforcement and changes at the park and shoreline.",
+      "rows": [
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Housing, jobs, and “Second City” role",
+          "subtopic": "",
+          "comment": "New film facility in UH is in development process.",
+          "position": "",
+          "recommendation": "",
+          "geography": "UH",
+          "original": "New film facility in UH is in development process.",
+          "check": "The sentence does not mention housing, jobs, or Second City. Topic is the section heading. UH is not spelled out, and the site is not named.",
+          "id": "T-56",
+          "passageId": "P19"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Housing, jobs, and “Second City” role",
+          "subtopic": "",
+          "comment": "Many people still drive in town to work live in Ewa, adding to traffic.",
+          "position": "",
+          "recommendation": "",
+          "geography": "Ewa",
+          "original": "Many people still drive in town to work live in Ewa, adding to traffic.",
+          "check": "The sentence is unpunctuated and was not rewritten. “Town” is not named, so it is not in Geography.",
+          "id": "T-57",
+          "passageId": "P19"
+        },
+        {
+          "organization": "Office of CM Augie Tulba",
+          "type": "",
+          "topic": "Housing, jobs, and “Second City” role",
+          "subtopic": "",
+          "comment": "",
+          "position": "Hopes for more jobs in Kapolei / Ewa (Second City) so people can live and work in the region.",
+          "recommendation": "",
+          "geography": "Kapolei; Ewa",
+          "original": "Councilmember hopes for more jobs in Kapolei / Ewa (Second City) so people can live and work in the region.",
+          "check": "The sentence says “Councilmember.” This meeting is with CM Tulba. “Second City” stays inside Position. It is not given its own geography entry. Coded as a hope, not a recommendation.",
+          "id": "T-58",
+          "passageId": "P19"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Housing, jobs, and “Second City” role",
+          "subtopic": "",
+          "comment": "Many residents are local families getting their first home. Demographic has shifted from more rural / low-income perception to growing middle-class base.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "Many residents are local families getting their first home. Demographic has shifted from more rural / low-income perception to growing middle-class base.",
+          "check": "Place is not named. “Perception” is kept. The notes do not say whether this is a change in reputation or in who lives there.",
+          "id": "T-59",
+          "passageId": "P19"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Housing, jobs, and “Second City” role",
+          "subtopic": "",
+          "comment": "Ewa community is strong: sports as central identity local teams and schools performing well.",
+          "position": "",
+          "recommendation": "",
+          "geography": "Ewa",
+          "original": "Emphasizes that Ewa community is strong: sports as central identity local teams and schools performing well.",
+          "check": "“Emphasizes” has no subject. Not attributed to a person.",
+          "id": "T-60",
+          "passageId": "P19"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Housing, jobs, and “Second City” role",
+          "subtopic": "Shoreline development",
+          "comment": "Oneula / Hoakalei New luxury housing going up. This area historically had significant homeless presence.",
+          "position": "",
+          "recommendation": "",
+          "geography": "Oneula; Hoakalei",
+          "original": "Shoreline development: Oneula / Hoakalei New luxury housing going up. This area historically had significant homeless presence.",
+          "check": "“This area” is read as Oneula / Hoakalei from the same passage. “New” is capitalized as in the source.",
+          "id": "T-61",
+          "passageId": "P19"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Housing, jobs, and “Second City” role",
+          "subtopic": "Shoreline development",
+          "comment": "Luxury homeowners will pressure for more enforcement and changes at the park and shoreline.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "Luxury homeowners will pressure for more enforcement and changes at the park and shoreline.",
+          "check": "Stated as what will happen, not as a recommendation. The park is not named.",
+          "id": "T-62",
+          "passageId": "P19"
+        }
+      ]
+    },
+    {
+      "id": "P20",
+      "heading": "Names and groups suggested for CAC",
+      "source": "John Roger, Alex Gaos, Mr. Pillman from NB 23\nSenator Kurt Fevella has deep knowledge of historical issues from first road built\nLi Cobian, racetrack proponent, very vocal\nEwa Villages HOA (Tesha Malama), they want to have a community center\nVerona Village Peter Savio. Verona village does not want to be with Ewa villages, but want a community center\nEwa Villages Homeowners Association: President Willy Gonzales\nEwa Villages Historical Society: Board members. Manager’s mansion would require too much money to develop it into something.\nResidents of West Loch senior housing: vocal, active, important for senior perspective on services, mobility, and safety.",
+      "rows": [
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Names and groups suggested for CAC",
+          "subtopic": "",
+          "comment": "John Roger, Alex Gaos, Mr. Pillman from NB 23.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "John Roger, Alex Gaos, Mr. Pillman from NB 23",
+          "check": "The section heading says these names are suggested for CAC. That was not copied into Recommendation, so you can add it if you want it on this row. It is unclear whether “from NB 23” applies to Mr. Pillman only or to all three. They stay on one row. No organization is named for John Roger or Alex Gaos.",
+          "id": "T-63",
+          "passageId": "P20"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Names and groups suggested for CAC",
+          "subtopic": "",
+          "comment": "Senator Kurt Fevella has deep knowledge of historical issues from first road built.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "Senator Kurt Fevella has deep knowledge of historical issues from first road built",
+          "check": "CAC suggestion is only in the section heading, not copied into Recommendation. “First road” is not named. Not merged with the earlier “Senator Fevella” rows.",
+          "id": "T-64",
+          "passageId": "P20"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Names and groups suggested for CAC",
+          "subtopic": "",
+          "comment": "Li Cobian, racetrack proponent, very vocal.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "Li Cobian, racetrack proponent, very vocal",
+          "check": "CAC suggestion is only in the section heading, not copied into Recommendation. Not merged with the earlier Kalaeloa row about Li Cobian.",
+          "id": "T-65",
+          "passageId": "P20"
+        },
+        {
+          "organization": "Ewa Villages HOA",
+          "type": "",
+          "topic": "Names and groups suggested for CAC",
+          "subtopic": "",
+          "comment": "Tesha Malama is named in parentheses.",
+          "position": "They want to have a community center.",
+          "recommendation": "",
+          "geography": "",
+          "original": "Ewa Villages HOA (Tesha Malama), they want to have a community center",
+          "check": "“They” is read as Ewa Villages HOA. Tesha Malama’s role is not stated. Not merged with the later Ewa Villages Homeowners Association row. CAC suggestion is only in the section heading.",
+          "id": "T-66",
+          "passageId": "P20"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Names and groups suggested for CAC",
+          "subtopic": "",
+          "comment": "Verona Village Peter Savio.",
+          "position": "Verona village does not want to be with Ewa villages, but want a community center.",
+          "recommendation": "",
+          "geography": "",
+          "original": "Verona Village Peter Savio. Verona village does not want to be with Ewa villages, but want a community center",
+          "check": "Peter Savio’s role is not stated. Verona Village is not coded as an organization or a place. Capitalization of “village” follows the source. CAC suggestion is only in the section heading.",
+          "id": "T-67",
+          "passageId": "P20"
+        },
+        {
+          "organization": "Ewa Villages Homeowners Association",
+          "type": "",
+          "topic": "Names and groups suggested for CAC",
+          "subtopic": "",
+          "comment": "President Willy Gonzales.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "Ewa Villages Homeowners Association: President Willy Gonzales",
+          "check": "Not merged with “Ewa Villages HOA (Tesha Malama).” The notes do not say these are the same body. CAC suggestion is only in the section heading.",
+          "id": "T-68",
+          "passageId": "P20"
+        },
+        {
+          "organization": "Ewa Villages Historical Society",
+          "type": "",
+          "topic": "Names and groups suggested for CAC",
+          "subtopic": "",
+          "comment": "Board members. Manager’s mansion would require too much money to develop it into something.",
+          "position": "",
+          "recommendation": "",
+          "geography": "",
+          "original": "Ewa Villages Historical Society: Board members. Manager’s mansion would require too much money to develop it into something.",
+          "check": "Board member names are not listed. The mansion sentence does not say who holds that view, or what “something” is. The mansion is not given a geography entry.",
+          "id": "T-69",
+          "passageId": "P20"
+        },
+        {
+          "organization": "",
+          "type": "",
+          "topic": "Names and groups suggested for CAC",
+          "subtopic": "",
+          "comment": "Residents of West Loch senior housing: vocal, active, important for senior perspective on services, mobility, and safety.",
+          "position": "",
+          "recommendation": "",
+          "geography": "West Loch senior housing",
+          "original": "Residents of West Loch senior housing: vocal, active, important for senior perspective on services, mobility, and safety.",
+          "check": "“Residents of West Loch senior housing” is a description, not coded as an organization. CAC suggestion is only in the section heading.",
+          "id": "T-70",
+          "passageId": "P20"
+        }
+      ]
+    }
+  ]
+}
