@@ -6,33 +6,71 @@
   <title>CM Tulba notes — subtopic highlighters</title>
   <style>
     :root {
-      --ink: #1c1916;
-      --muted: #5e584f;
-      --line: #e4ddd2;
-      --paper: #f7f4ee;
-      --card: #fffdf9;
+      --navy: #2b3990;
+      --peach: #f5a26f;
+      --grey: #76777b;
+      --paper: #fbf8f4;
+      --ink: #1e1e22;
+      --line: #e4ddd4;
+      --muted: #76777b;
+      --card: #fff;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
+      min-height: 100%;
       color: var(--ink);
       background: var(--paper);
-      font: 18px/1.5 "Segoe UI", Candara, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
     }
-    header {
-      background: #1e4d3a;
-      color: #f6f3ec;
-      padding: 22px 28px 18px;
+    .site-header {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 0.85rem 1.25rem;
+      border-bottom: 3px solid var(--navy);
+      background: #fff;
     }
-    header h1 {
-      margin: 0 0 4px;
-      font-family: Georgia, "Palatino Linotype", serif;
-      font-size: 30px;
-      font-weight: normal;
+    .header-brand {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      min-width: 0;
     }
-    header p { margin: 0; max-width: 70ch; }
-    header .meta { margin-top: 8px; color: #d5e4db; font-size: 16px; }
-    main { max-width: 1180px; margin: 0 auto; padding: 22px 20px 64px; }
+    .logo { height: 72px; width: auto; display: block; }
+    .header-text h1 {
+      margin: 0;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 0.01em;
+    }
+    .header-text p { margin: 0.25rem 0 0; max-width: 70ch; font-size: 0.9rem; color: var(--grey); }
+    .header-tools { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.45rem; }
+    .header-tools a {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--navy);
+      background: #fff;
+      border: 1px solid var(--navy);
+      padding: 0.28rem 0.65rem;
+      text-decoration: none;
+    }
+    .date-row { margin: 0.35rem 0 0; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--grey); }
+    .date-row input {
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--navy);
+      padding: 0.2rem 0.45rem;
+      width: 10rem;
+    }
+    .meta { margin-top: 0.25rem; }
+    main { max-width: 1180px; margin: 0 auto; padding: 1.1rem 1.25rem 4rem; }
     .board {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -42,15 +80,15 @@
     .zone {
       min-height: 132px;
       background: var(--card);
-      border: 2px dashed #d5cdc1;
-      border-radius: 12px;
+      border: 2px dashed var(--line);
+      border-radius: 0;
       padding: 10px;
     }
     .zone.tray { grid-column: 1 / -1; background: #fff8e8; }
     @media (max-width: 900px) {
       .board { grid-template-columns: 1fr 1fr; }
     }
-    .zone.over { border-color: #1e4d3a; background: #e7f0eb; }
+    .zone.over { border-color: var(--navy); background: #eef0f8; }
     .zone h3 { margin: 0 0 8px; font-size: 16px; }
     .zone .hint { margin: 0; color: var(--muted); font-size: 14px; }
     .chip {
@@ -69,19 +107,13 @@
     }
     .chip .pid { font-weight: 700; }
     .pid-badge {
-      font-size: 13px;
+      font-size: 0.75rem;
       font-weight: 700;
-      letter-spacing: 0.03em;
-      background: rgba(255, 255, 255, 0.72);
-      border-radius: 999px;
-      padding: 2px 8px;
-    }
-    .note {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 14px 16px;
-      margin-bottom: 18px;
+      letter-spacing: 0.04em;
+      color: var(--grey);
+      background: transparent;
+      border-radius: 0;
+      padding: 0;
     }
     .legend {
       display: flex;
@@ -93,13 +125,15 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 999px;
-      padding: 4px 10px 4px 6px;
-      background: white;
+      border: 1px solid var(--navy);
+      border-radius: 0;
+      padding: 0.28rem 0.55rem;
+      background: #fff;
+      color: var(--navy);
       cursor: pointer;
       font: inherit;
-      font-size: 15px;
+      font-size: 0.8rem;
+      font-weight: 700;
     }
     .swatch {
       width: 18px;
@@ -111,76 +145,79 @@
     section { margin: 0 0 22px; }
     h2 {
       margin: 0 0 8px;
-      font-size: 15px;
-      letter-spacing: 0.04em;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #1e4d3a;
+      color: var(--grey);
+      border-bottom: 2px solid var(--peach);
+      display: inline-block;
+      padding-bottom: 0.2rem;
     }
     article {
-      border-radius: 10px;
-      padding: 10px 14px 12px;
-      margin: 0 0 10px;
-      border: 1px solid rgba(0, 0, 0, 0.06);
+      margin: 0 0 0.75rem;
+      padding: 0.9rem 1rem 1.1rem;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--peach);
+      scroll-margin-top: 1rem;
     }
+    article:target { outline: 2px solid var(--navy); }
     .label-row {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 6px;
+      gap: 0.6rem;
+      margin-bottom: 0.45rem;
     }
     .label-row input {
       flex: 1;
       font: inherit;
-      font-size: 15px;
-      font-weight: 650;
-      color: #3a332b;
-      background: rgba(255, 255, 255, 0.55);
-      border: 1px solid transparent;
-      border-radius: 6px;
-      padding: 4px 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 0;
+      padding: 0.35rem 0.5rem;
     }
     .label-row input:focus {
       outline: none;
-      border-color: rgba(0, 0, 0, 0.25);
-      background: white;
-    }
-    .label-row button.dot {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      border: 1px solid rgba(0, 0, 0, 0.18);
-      cursor: pointer;
-      padding: 0;
+      border-color: var(--navy);
     }
     p.text {
       margin: 0;
       white-space: pre-wrap;
-      font-family: Georgia, "Palatino Linotype", serif;
-      font-size: 19px;
-      line-height: 1.45;
+      font-size: 0.88rem;
+      line-height: 1.4;
+      color: var(--ink);
     }
     .toolbar { margin-top: 8px; }
     .toolbar button {
       font: inherit;
-      font-size: 15px;
-      border: 1px solid var(--line);
-      background: white;
-      border-radius: 8px;
-      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--navy);
+      border: 1px solid var(--navy);
+      background: #fff;
+      padding: 0.35rem 0.75rem;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Meeting with CM Tulba</h1>
-    <p>12.8.25. Each note is tulba-01, tulba-02, and so on. Drag a tag into a bucket. Tags left in “Not placed” were not filed, because more than one bucket could fit.</p>
-    <p class="meta" id="meta"></p>
+  <header class="site-header">
+    <div class="header-brand">
+      <img class="logo" src="assets/ewa-dp-logo.png" alt="ʻEwa Development Plan">
+      <div class="header-text">
+        <h1>Meeting with CM Tulba</h1>
+        <p class="date-row"><label>Date <input id="meeting-date" type="text" placeholder="Enter a date" aria-label="Meeting date"></label></p>
+        <p>Each note is tulba-01, tulba-02, and so on. Drag a tag into a bucket. Tags left in “Not placed” were not filed, because more than one bucket could fit.</p>
+        <p class="meta" id="meta"></p>
+        <div class="header-tools"><a href="index.html">All interviews</a></div>
+      </div>
+    </div>
   </header>
   <main>
-    <div class="note">
-      Attendees: Min Bu, Noelle Cole, Dina Wong, Keith Matson (Consultant), CM Tulba, Marcia Tagavilla (Chief Of Staff, Office of CM Augie Tulba).
-    </div>
     <div class="board" id="board"></div>
     <div class="legend" id="legend"></div>
     <div id="doc"></div>
@@ -188,7 +225,9 @@
       <button id="reset" type="button">Reset labels, colors, and buckets</button>
     </div>
   </main>
+  <script src="interviews.js"></script>
   <script>
+    const INTERVIEW_ID = "tulba";
     const SOURCE = "CM Tulba DPP .docx";
     const FAMILIES = {
       infrastructure: { wash: "#fff3e8", ink: "#8a4b12", shades: ["#ffd7ad", "#ffc894", "#ffb878", "#ffe6cc"] },
@@ -598,7 +637,7 @@
           const color = colorForBlock(block);
           const article = document.createElement("article");
           article.id = block.id;
-          article.style.background = color;
+          article.style.borderLeftColor = color;
           const row = document.createElement("div");
           row.className = "label-row";
           const badge = document.createElement("span");
@@ -669,6 +708,12 @@
         legend.appendChild(button);
       });
     }
+
+    const meetingDate = document.getElementById("meeting-date");
+    meetingDate.value = window.interviewDate(INTERVIEW_ID);
+    meetingDate.addEventListener("input", function () {
+      window.saveInterviewDate(INTERVIEW_ID, meetingDate.value);
+    });
 
     document.getElementById("meta").textContent = "Source file: notes/" + SOURCE;
     document.getElementById("reset").addEventListener("click", function () {
