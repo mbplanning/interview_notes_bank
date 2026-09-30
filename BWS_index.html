@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CM Tulba notes — subtopic highlighters</title>
+  <title>BWS notes</title>
   <style>
     :root {
       --navy: #2b3990;
@@ -245,9 +245,9 @@
     <div class="header-brand">
       <img class="logo" src="assets/ewa-dp-logo.png" alt="ʻEwa Development Plan">
       <div class="header-text">
-        <h1>Meeting with CM Tulba</h1>
+        <h1>BWS</h1>
         <p class="date-row"><label>Date <input id="meeting-date" type="text" placeholder="Enter a date" aria-label="Meeting date"></label></p>
-        <p>Each note is tulba-01, tulba-02, and so on. Drag a tag into a bucket. Tags left in “Not placed” were not filed, because more than one bucket could fit.</p>
+        <p>Each note is bws-01, bws-02, and so on. Drag a tag into a bucket. Tags left in “Not placed” were not filed, because more than one bucket could fit.</p>
         <p class="meta" id="meta"></p>
         <div class="header-tools"><a href="Tulba_index.html">All interviews</a></div>
       </div>
@@ -263,8 +263,8 @@
   </main>
   <script src="interviews.js"></script>
   <script>
-    const INTERVIEW_ID = "tulba";
-    const SOURCE = "CM Tulba DPP .docx";
+    const INTERVIEW_ID = "bws";
+    const SOURCE = "BWS .docx";
     const FAMILIES = {
       infrastructure: { wash: "#fff3e8", ink: "#8a4b12", shades: ["#ffd7ad", "#ffc894", "#ffb878", "#ffe6cc"] },
       "land-use": { wash: "#f6f0ff", ink: "#5b3d91", shades: ["#e3d4ff", "#d4c2fb", "#c9b6f6", "#efe6ff"] },
@@ -277,7 +277,7 @@
       other: { wash: "#f4f4f6", ink: "#3d4454", shades: ["#d9dde8", "#c8cedc", "#b7c0d2", "#e6e9f0"] },
       "": { wash: "#fff8e8", ink: "#5e584f", shades: ["#efeae2", "#e7e0d4", "#f6f1e8", "#e4ddd2"] }
     };
-    const STORAGE_KEY = "tulba-buckets-v1";
+    const STORAGE_KEY = "bws-buckets-v1";
     const BUCKETS = [
       { id: "infrastructure", label: "Infrastructure" },
       { id: "land-use", label: "Land use urban form" },
@@ -290,202 +290,155 @@
       { id: "other", label: "Other suggestions" }
     ];
     const START_BUCKET = {
-      "tulba-02": "transport",
-      "tulba-03": "transport",
-      "tulba-04": "transport",
-      "tulba-06": "transport",
-      "tulba-07": "sustainability",
-      "tulba-08": "infrastructure",
-      "tulba-09": "infrastructure",
-      "tulba-10": "parks",
-      "tulba-11": "parks",
-      "tulba-12": "parks",
-      "tulba-13": "parks",
-      "tulba-16": "sustainability",
-      "tulba-17": "econ",
-      "tulba-18": "transport",
-      "tulba-19": "transport",
-      "tulba-20": "healthy",
-      "tulba-21": "healthy",
-      "tulba-23": "econ",
-      "tulba-24": "econ",
-      "tulba-26": "land-use"
+      "bws-01": "infrastructure",
+      "bws-02": "infrastructure",
+      "bws-03": "infrastructure",
+      "bws-04": "infrastructure",
+      "bws-05": "infrastructure",
+      "bws-06": "sustainability",
+      "bws-07": "land-use",
+      "bws-08": "land-use",
+      "bws-09": "sustainability",
+      "bws-10": "infrastructure",
+      "bws-11": "sustainability",
+      "bws-12": "land-use",
+      "bws-13": "land-use",
+      "bws-14": "sustainability",
+      "bws-15": "sustainability",
+      "bws-16": "infrastructure",
+      "bws-17": "infrastructure",
+      "bws-18": "land-use",
+      "bws-20": "infrastructure",
+      "bws-22": "infrastructure",
+      "bws-23": "sustainability",
+      "bws-25": "econ",
+      "bws-26": "econ",
+      "bws-27": "sustainability",
+      "bws-28": "sustainability",
+      "bws-29": "infrastructure",
+      "bws-31": "sustainability",
+      "bws-33": "infrastructure",
+      "bws-34": "other",
+      "bws-36": "sustainability",
+      "bws-37": "sustainability",
+      "bws-39": "sustainability",
+      "bws-40": "sustainability",
+      "bws-41": "infrastructure",
+      "bws-42": "infrastructure",
+      "bws-43": "infrastructure",
+      "bws-44": "econ",
+      "bws-46": "econ",
+      "bws-49": "infrastructure",
+      "bws-50": "infrastructure",
+      "bws-51": "infrastructure",
+      "bws-54": "infrastructure",
+      "bws-56": "other",
     };
 
     const SECTIONS = [
       {
-        heading: "CM’s view of Ewa",
+        heading: "Kalaeloa water system",
         blocks: [
-          {
-            id: "b1",
-            subtopic: "CM’s view of Ewa",
-            text: "CM’s view of Ewa: Largely built out, Hoakalei, Gentry finished, new development in Hoopili. Ewa developed rapidly, 2013 plan has largely been built upon. Main planning challenges: traffic and safety, expanding and maintaining park and recreation, dealing with cesspool issues."
-          }
+          { id: "b1", subtopic: "Private water system", text: "HCDA in Kalaeloa, potable water in Kalaeloa served by a private system (HI/Kalaeloa Water Co.) under Public Utility Commission (PUC); City/BWS wants to respect service area boundaries." },
+          { id: "b2", subtopic: "Out of capacity", text: "Kalaeloa is out of capacity, Hunt trying to do more subdivisions." },
+          { id: "b3", subtopic: "R1 recycled water", text: "City could provide a lot more R1 recycled water (not potable water); progress slow, haven’t seen much plan or investment." },
+          { id: "b4", subtopic: "Later BWS burden", text: "Worry about it will be BWS burden later, like City of Kapolei." },
+          { id: "b5", subtopic: "Free up potable capacity", text: "free up potable water capacity then can grow more" },
+          { id: "b6", subtopic: "Aquifer yields", text: "Kalaeloa draws from Ewa/Waipahu aquifers; sustainable yields likely to decrease over time; Commission on Water Resource Management trends downward; prob likely to get more permitted use. The Waianae region is currently bringing water in from Ewa/Waipahu." },
         ]
       },
       {
-        heading: "Traffic",
+        heading: "Constraints & permitting",
         blocks: [
-          { id: "b2", subtopic: "Getting to rail", text: "Getting to rail, multimodal transportation is not good." },
-          { id: "b3", subtopic: "Ft weaver road", text: "Ft weaver road is always congested. Want to get people off that road." },
-          { id: "b4", subtopic: "Ho‘opili road loading", text: "Kualakai / Kapolei Parkway / new Ho‘opili development: loading onto the road system." },
-          { id: "b5", subtopic: "E-bike safety", text: "Highlights e-bike safety: there have been 3–4 e-bike fatalities in his district, all victims were underage." },
-          { id: "b6", subtopic: "Kualakai Parkway", text: "Kualakai Parkway: high speed cars crashing into homes.Traffic calming: DTS consider road diets, changes lanes to bus only, narrowing Kapolei Parkway. Road diet for safety vs drivers getting angry about losing lanes." }
+          { id: "b7", subtopic: "Why grow", text: "Community: why grow if water resources are limited? (Good question.  Will need to seek clarity from BWS on what new sources for development are viable to be pursued for the long term)" },
+          { id: "b8", subtopic: "No advance commitments", text: "No advance water commitments (advanced permits) by BWS" },
+          { id: "b9", subtopic: "Conservation reuse", text: "Free up capacity: conservation reuse, see no plan doing it." },
+          { id: "b10", subtopic: "Leeward water transfer", text: "Dryer on leeward coat, bring water from Ewa Waipahu for Waianae coast" },
+          { id: "b11", subtopic: "Aggressive conservation", text: "BWS stresses the important of aggressive conservation and reuse" },
+          { id: "b12", subtopic: "TOD entitlements", text: "HCDA and planned TOD will not be able to get entitlements to much more capacity without new sources and aggressive reuse. Capacity issues cannot be solved solely by the City. State and private sector need to get involved." },
+          { id: "b13", subtopic: "TOD buildout estimates", text: "Need better estimates and timeframe for TOD buildout." },
+          { id: "b14", subtopic: "Waianae Water Management Area", text: "Regional context: BWS has applied for the whole Waianae Coast to be a uniform Water Management Area under the state meaning there would be an extra layer for water use permissions (Nanakuli to Kaena Point)" },
         ]
       },
       {
-        heading: "Resiliency",
+        heading: "Diverse water system in Ewa",
         blocks: [
-          {
-            id: "b7",
-            subtopic: "Resiliency hub",
-            text: "Right now if a disaster happens, no one knows where to go, no facility. CM is Very interested in a resiliency hub concept. Reference to his prior experience in Kaʻū (Big Island), where a rec center acted as a hub during earthquakes, tsunamis. He suggested to use an existing or upgraded rec center (e.g., Mahiko or similar) as a hardened resiliency hub, with supplies and backup power."
-          }
+          { id: "b15", subtopic: "How far to take R-1", text: "R-1 water is used for irrigation, how far do you take this?  This is a planning policy call." },
+          { id: "b16", subtopic: "Leeward groundwater designation", text: "Designation: bws petition to designate leeward Coast as a groundwater management area to unify management, the last area on Oahu. Will cause more permitting and requirements." },
+          { id: "b17", subtopic: "Redhill shutdown", text: "Redhill shutdown" },
+          { id: "b18", subtopic: "Commitment at impact fee", text: "Diverse water system, master planned community, approved master plan yes but commitment happens at impact fee." },
+          { id: "b19", subtopic: "EK TOD area", text: "EK TOD area" },
+          { id: "b20", subtopic: "R1 system not up", text: "R1 has capacity, system not up yet" },
+          { id: "b21", subtopic: "Grace pacific land", text: "Grace pacific land" },
+          { id: "b22", subtopic: "Dual system not connected", text: "Dual system not connected yet: extending R1 toward UH West Oahu, Kalaeloa, laulani master-plan in progress but not fully connected." },
+          { id: "b23", subtopic: "R1 irrigates crops", text: "R1 can irrigate all crops" },
+          { id: "b24", subtopic: "R1 by 2045", text: "R1 for gov, by 2045 use domestic water; require for Aloha stadium for R1" },
+          { id: "b25", subtopic: "Fund backbone", text: "Cost support: state and private sector help fund backbone infrastructure" },
+          { id: "b26", subtopic: "BWS rates", text: "BWS relies primarily on rates" },
+          { id: "b27", subtopic: "Onsite conservation", text: "Developments look at onsite reduce, conservation, reduce dependence on potable water" },
+          { id: "b28", subtopic: "Aggressive on-site reuse", text: "We need extreme, aggressive conservation measures that emphasizes on-site re-use.  The overall goal is to reduce the use of potable water." },
+          { id: "b29", subtopic: "Centralized water solution", text: "Need a centralized solution – to collect, treat, and distribute water resource." },
+          { id: "b30", subtopic: "OneWater", text: "OneWater" },
+          { id: "b31", subtopic: "Kobayashi greywater", text: "Onsite reuse greywater by Kobayashi group." },
+          { id: "b32", subtopic: "Treat centrally, reuse onsite", text: "Collect water, treat centrally, then reuse onsite." },
+          { id: "b33", subtopic: "ENV collection system", text: "Work with on ENV collection system integrity" },
+          { id: "b34", subtopic: "One Water in the Plan", text: "One Water principles should be embedded into the Plan" },
         ]
       },
       {
-        heading: "Cess Pool",
+        heading: "Water demand",
         blocks: [
-          {
-            id: "b8",
-            subtopic: "Cesspool conversion",
-            text: "ENV manages cesspool conversion district, there are 932 homes with cess pool in Ewa beach. City will pay connection to lateral into the main sewer line. After system is active, property owners have 30 days to connect. After connection, homeowners begin paying a sewer bill. Some homeowners currently pay nothing for sewer and resist this plan because they don’t want a new bill. Not sure how much the monthly bill will be. There is the CARE? program that help needy family reduce the bill."
-          },
-          {
-            id: "b9",
-            subtopic: "Sewer connection",
-            text: "Senator Fevella wants to change the state law, that resident don’t have to connect to sewer. CM didn’t think he would be successful. Community can refused to connect, but CM believes City’s program is actually a good deal for residents."
-          }
+          { id: "b35", subtopic: "TOD water need", text: "TOD build out’s need for water need to clarify" },
+          { id: "b36", subtopic: "Watershed plan missing SLR", text: "Draft watershed mngt plan, missing SLR content" },
+          { id: "b37", subtopic: "Watershed Management Plan", text: "Storm strategic plan, bws strategic plan, infrastructure investment plan, water master plan? Updating now BWS Watershed Management Plan (WMP) for Ewa was put aside 8 years ago and the update still needs to be finished.  They will pick this back up to synch with Ewa DP." },
+          { id: "b38", subtopic: "SLR and wastewater", text: "SLR salinity risk, seawater coming into waste water, risk. Waste water important for bws too. Check Waste water plan" },
+          { id: "b39", subtopic: "Use less, pay less", text: "BWS and ENV are working together to promote a “use less, pay less” model and incentivize conservation through the water sensible rebate program" },
+          { id: "b40", subtopic: "PFAS in RO", text: "PFAS  in RO (not in R1) recycled water limits where it can be used." },
+          { id: "b41", subtopic: "More treatment and plant", text: "Future need for more treatment and plant" },
         ]
       },
       {
-        heading: "Parks",
+        heading: "Cost sharing",
         blocks: [
-          {
-            id: "b10",
-            subtopic: "Fields",
-            text: "There’s Mahiko, Asing, and another park. Not enough fields, sports are year around now, parks never have time to heal. The community complaints fields are poorly maintained. DOE fields are often too expensive to rent, so league use concentrates on City fields."
-          },
-          {
-            id: "b11",
-            subtopic: "Sports",
-            text: "Baseball is a big thing here. Strong sports culture. Campbell HS football and girls flag football championships. Parks heavily used by local families and are central to community life."
-          },
-          {
-            id: "b12",
-            subtopic: "Gym and indoor space",
-            text: "Gym and indoor space: Only a few key indoor facilities (e.g., Mahiko gym, others), Many activities still outdoors. The community desires for more gym space and indoor facilities."
-          },
-          {
-            id: "b13",
-            subtopic: "No public pool",
-            text: "No public pool: There is no CCH pool in the district. Only private / restricted pools (Krocs center, private schools, resort communities). Ewa has the second highest rate in drowning incidents. CM mentioned there is a local nonprofit teaches kids swimming. Many children don’t have accessible swim instruction, raising safety concern. A child recently drowned from fishing."
-          }
+          { id: "b42", subtopic: "Water system backbone", text: "Water system backbone: well, transmission main…" },
+          { id: "b43", subtopic: "Developer installs onsite system", text: "Onsite water system: developer to install" },
+          { id: "b44", subtopic: "Hookup fee", text: "Smaller dev: hookup fee" },
+          { id: "b45", subtopic: "Larger developments", text: "Larger: build some backbone, in the master plan review" },
+          { id: "b46", subtopic: "State land rich cash poor", text: "State land rich cash poor" },
+          { id: "b47", subtopic: "Tier water use and sewer", text: "Tier water use and sewer" },
         ]
       },
       {
-        heading: "Puuloa Gun range and contamination",
+        heading: "Plans integration",
         blocks: [
-          {
-            id: "b14",
-            subtopic: "Puuloa gun range",
-            text: "Ewa community is mostly supportive of military. The gun range has been there for a long time. Some community members believe there are contaminants in soil and water want the military to clean it up and move the gun range."
-          }
+          { id: "b48", subtopic: "Watershed plan and EDP", text: "Sub-objectives, land to water, watershed plan & EDP\nShould be updated in tandem" },
         ]
       },
       {
-        heading: "Kalaeloa, racetrack",
+        heading: "Desalination plant",
         blocks: [
-          {
-            id: "b15",
-            subtopic: "Racetrack demand",
-            text: "Large tracts of land were transferred from the military. Community demands: Racetrack. Advocate: Li Cobian is a key figure wants a motorsports facility at Kalaeloa."
-          },
-          {
-            id: "b16",
-            subtopic: "PFAS and construction",
-            text: "CM thinks a racetrack could bring significant economic benefits, cites Las Vagas brings big revenues from F1 weekends. But the concerns is PFAS contamination in soil makes construction and grading complicated. You can’t dig, how do build? Need to ask DOH about it."
-          },
-          {
-            id: "b17",
-            subtopic: "Racetrack funding",
-            text: "Funding is unclear: advocates expect the City to pay for the racetrack facility. Past idea by Mufi to Use Kalaeloa Airport runway for racing."
-          }
+          { id: "b49", subtopic: "Build the desal plant", text: "Build it" },
+          { id: "b50", subtopic: "Running in 2-3 years", text: "Want to get it running 2-3 years" },
+          { id: "b51", subtopic: "Desal before new wells", text: "The desal plant could be online long before new well sources could be operating" },
         ]
       },
       {
-        heading: "Road network, north road",
+        heading: "Fire risk",
         blocks: [
-          {
-            id: "b18",
-            subtopic: "North Road",
-            text: "North Road is partly owned by military, golf course, and City. Road is not up to current standards. Council initiated a reso to take over North Road. Golf course was reluctant to spend money to bring it to code. At one point suggested they might close access. CM Worried about emergency access if North Road is closed. Senator Fevella is involved."
-          },
-          {
-            id: "b19",
-            subtopic: "Old Renton Road",
-            text: "Old Renton Road, near Mahiko Park and other subdivisions could potentially connect to major roads (Kualakai Parkway)."
-          }
+          { id: "b52", subtopic: "Wildfire exposure", text: "Ewa are high wildfire risk, makakilo very exposed" },
+          { id: "b53", subtopic: "Fire through design", text: "Passive respond to fire; Development Plans, reduce the rink through design" },
+          { id: "b54", subtopic: "Wildland fires", text: "Cannot design water systems to fight major wildland fires" },
+          { id: "b55", subtopic: "Fire protection spacing", text: "Fire protection standards, spacing, for higher density development such as TOD" },
+          { id: "b56", subtopic: "Firewise standards", text: "Look at Firewise Communities standards for wildland/urban interface" },
         ]
       },
-      {
-        heading: "Public safety services – Police, fire, EMS, substation",
-        blocks: [
-          {
-            id: "b20",
-            subtopic: "Police",
-            text: "Police: there are only 4 patrol officers covering the entire Ewa area. There is demand for a police substation in the district. Neighborhood watch patrol in the community."
-          },
-          {
-            id: "b21",
-            subtopic: "EMS",
-            text: "EMS (James Ireland) currently uses various locations to house its substation. The agency is currently doing a PIM of using Safeway land for emergency station, share with preschool. EMS has previously used Ewa village golf course space for EMS station."
-          },
-          {
-            id: "b22",
-            subtopic: "Fire and EMS facilities",
-            text: "There is a Fire station in Kapolei, not in Ewa side. There is a City-level task force examining whether EMS and Fire should merge. Development plans historically did not plan for EMS facilities, since EMS is a state-contracted service. Suggest EDP should identify EMS and emergency medical facilities similar to fire and police."
-          }
-        ]
-      },
-      {
-        heading: "Housing, jobs, and “Second City” role",
-        blocks: [
-          { id: "b23", subtopic: "Film facility", text: "New film facility in UH is in development process." },
-          {
-            id: "b24",
-            subtopic: "Jobs",
-            text: "Many people still drive in town to work live in Ewa, adding to traffic. Councilmember hopes for more jobs in Kapolei / Ewa (Second City) so people can live and work in the region."
-          },
-          {
-            id: "b25",
-            subtopic: "Residents",
-            text: "Many residents are local families getting their first home. Demographic has shifted from more rural / low-income perception to growing middle-class base. Emphasizes that Ewa community is strong: sports as central identity local teams and schools performing well."
-          },
-          {
-            id: "b26",
-            subtopic: "Shoreline development",
-            text: "Shoreline development: Oneula / Hoakalei New luxury housing going up. This area historically had significant homeless presence. Luxury homeowners will pressure for more enforcement and changes at the park and shoreline."
-          }
-        ]
-      },
-      {
-        heading: "Names and groups suggested for CAC",
-        blocks: [
-          {
-            id: "b27",
-            subtopic: "Suggested for CAC",
-            text: "John Roger, Alex Gaos, Mr. Pillman from NB 23\nSenator Kurt Fevella has deep knowledge of historical issues from first road built\nLi Cobian, racetrack proponent, very vocal\nEwa Villages HOA (Tesha Malama), they want to have a community center\nVerona Village Peter Savio. Verona village does not want to be with Ewa villages, but want a community center\nEwa Villages Homeowners Association: President Willy Gonzales\nEwa Villages Historical Society: Board members. Manager’s mansion would require too much money to develop it into something.\nResidents of West Loch senior housing: vocal, active, important for senior perspective on services, mobility, and safety."
-          }
-        ]
-      }
     ];
 
     (function numberItems() {
       let n = 1;
       SECTIONS.forEach(function (section) {
         section.blocks.forEach(function (block) {
-          block.id = "tulba-" + String(n).padStart(2, "0");
+          block.id = "bws-" + String(n).padStart(2, "0");
           n += 1;
         });
       });

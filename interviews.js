@@ -10,6 +10,15 @@ window.INTERVIEWS = [
     noteCount: 27,
     idPrefix: "tulba",
     source: "notes/CM Tulba DPP .docx"
+  },
+  {
+    id: "bws",
+    title: "BWS",
+    date: "",
+    href: "BWS_index.html",
+    noteCount: 56,
+    idPrefix: "bws",
+    source: "notes/BWS .docx"
   }
 ];
 
