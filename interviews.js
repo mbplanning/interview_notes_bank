@@ -1,20 +1,21 @@
 /* Add one object per interview page. Keep href pointed at that page.
-   On import, set date from the source when a date is stated. Leave date ""
-   when the source does not give one; the page then shows an empty date field. */
+   On import, set date from the source when a date is stated, and show that
+   date on the page. Leave date "" when the source does not give one.
+   Do not put interviewee or participant names on the page. */
 window.INTERVIEWS = [
   {
     id: "tulba",
     title: "Meeting with CM Tulba",
     date: "Dec 2025",
     href: "board.html",
-    noteCount: 27,
+    noteCount: 26,
     idPrefix: "tulba",
     source: "notes/CM Tulba DPP .docx"
   },
   {
     id: "bws",
     title: "BWS",
-    date: "",
+    date: "Nov 25",
     href: "BWS_index.html",
     noteCount: 26,
     idPrefix: "bws",

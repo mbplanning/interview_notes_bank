@@ -56,20 +56,35 @@
       padding: 0.28rem 0.65rem;
       text-decoration: none;
     }
-    .date-row { margin: 0.35rem 0 0; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--grey); }
-    .date-row input {
-      font: inherit;
+    .date-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 0.35rem 0 0;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+    .date-row .date-value {
       font-size: 0.9rem;
       font-weight: 400;
       letter-spacing: 0;
       text-transform: none;
       color: var(--ink);
+    }
+    .date-row a {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--navy);
       background: #fff;
       border: 1px solid var(--navy);
-      padding: 0.2rem 0.45rem;
-      width: 10rem;
+      padding: 0.28rem 0.65rem;
+      text-decoration: none;
     }
-    .meta { margin-top: 0.25rem; }
     main { max-width: 1180px; margin: 0 auto; padding: 1.1rem 1.25rem 4rem; }
     .board {
       display: grid;
@@ -84,9 +99,22 @@
       border-radius: 0;
       padding: 10px;
     }
-    .zone.tray { grid-column: 1 / -1; background: #fff8e8; }
+    .zone.tray {
+      grid-column: 2 / span 3;
+      grid-row: 3;
+      background: #fff8e8;
+    }
+    .zone[data-bucket="other"] {
+      grid-column: 1;
+      grid-row: 3;
+    }
     @media (max-width: 900px) {
       .board { grid-template-columns: 1fr 1fr; }
+      .zone.tray,
+      .zone[data-bucket="other"] {
+        grid-column: auto;
+        grid-row: auto;
+      }
     }
     .zone.over { border-color: var(--navy); background: #eef0f8; }
     .zone h3 { margin: 0 0 8px; font-size: 16px; }
@@ -133,6 +161,20 @@
       border-color: var(--navy);
       color: var(--ink);
     }
+    .bucket-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      flex: none;
+    }
+    .bucket-field span {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+    .bucket-select.secondary { border-style: dashed; }
     .remove-note {
       flex: none;
       width: 1.7rem;
@@ -220,23 +262,26 @@
       outline: none;
       border-color: var(--navy);
     }
-    p.text {
+    textarea.text {
+      display: block;
+      width: 100%;
       margin: 0;
+      resize: vertical;
+      min-height: 2.6rem;
+      overflow: hidden;
       white-space: pre-wrap;
+      overflow-wrap: break-word;
+      font: inherit;
       font-size: 0.88rem;
       line-height: 1.4;
       color: var(--ink);
-    }
-    .toolbar { margin-top: 8px; }
-    .toolbar button {
-      font: inherit;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--navy);
-      border: 1px solid var(--navy);
       background: #fff;
-      padding: 0.35rem 0.75rem;
-      cursor: pointer;
+      border: 1px solid transparent;
+      padding: 0.2rem 0.35rem;
+    }
+    textarea.text:focus {
+      outline: none;
+      border-color: var(--navy);
     }
   </style>
 </head>
@@ -246,10 +291,7 @@
       <img class="logo" src="assets/ewa-dp-logo.png" alt="ʻEwa Development Plan">
       <div class="header-text">
         <h1>Meeting with CM Tulba</h1>
-        <p class="date-row"><label>Date <input id="meeting-date" type="text" placeholder="Enter a date" aria-label="Meeting date"></label></p>
-        <p>Each note is tulba-01, tulba-02, and so on. Drag a tag into a bucket. Tags left in “Not placed” were not filed, because more than one bucket could fit.</p>
-        <p class="meta" id="meta"></p>
-        <div class="header-tools"><a href="Tulba_index.html">All interviews</a></div>
+        <p class="date-row">Date <span class="date-value" id="meeting-date"></span> <a href="Tulba_index.html">All interviews</a></p>
       </div>
     </div>
   </header>
@@ -257,14 +299,10 @@
     <div class="board" id="board"></div>
     <div class="legend" id="legend"></div>
     <div id="doc"></div>
-    <div class="toolbar">
-      <button id="reset" type="button">Reset labels, colors, and buckets</button>
-    </div>
   </main>
   <script src="interviews.js"></script>
   <script>
     const INTERVIEW_ID = "tulba";
-    const SOURCE = "CM Tulba DPP .docx";
     const FAMILIES = {
       infrastructure: { wash: "#fff3e8", ink: "#8a4b12", shades: ["#ffd7ad", "#ffc894", "#ffb878", "#ffe6cc"] },
       "land-use": { wash: "#f6f0ff", ink: "#5b3d91", shades: ["#e3d4ff", "#d4c2fb", "#c9b6f6", "#efe6ff"] },
@@ -290,9 +328,11 @@
       { id: "other", label: "Other suggestions" }
     ];
     const START_BUCKET = {
+      "tulba-01": "infrastructure",
       "tulba-02": "transport",
       "tulba-03": "transport",
       "tulba-04": "transport",
+      "tulba-05": "transport",
       "tulba-06": "transport",
       "tulba-07": "sustainability",
       "tulba-08": "infrastructure",
@@ -301,15 +341,34 @@
       "tulba-11": "parks",
       "tulba-12": "parks",
       "tulba-13": "parks",
+      "tulba-14": "land-use",
+      "tulba-15": "land-use",
       "tulba-16": "sustainability",
       "tulba-17": "econ",
       "tulba-18": "transport",
       "tulba-19": "transport",
-      "tulba-20": "healthy",
-      "tulba-21": "healthy",
+      "tulba-20": "land-use",
+      "tulba-21": "infrastructure",
+      "tulba-22": "infrastructure",
       "tulba-23": "econ",
       "tulba-24": "econ",
+      "tulba-25": "healthy",
       "tulba-26": "land-use"
+    };
+
+    const START_SECONDARY = {
+      "tulba-05": "healthy",
+      "tulba-07": "healthy",
+      "tulba-10": "healthy",
+      "tulba-11": "healthy",
+      "tulba-17": "land-use",
+      "tulba-20": "infrastructure",
+      "tulba-21": "healthy",
+      "tulba-23": "land-use"
+    };
+
+    const START_REMOVED = {
+      "tulba-11": true
     };
 
     const SECTIONS = [
@@ -363,8 +422,8 @@
         blocks: [
           {
             id: "b10",
-            subtopic: "Fields",
-            text: "There’s Mahiko, Asing, and another park. Not enough fields, sports are year around now, parks never have time to heal. The community complaints fields are poorly maintained. DOE fields are often too expensive to rent, so league use concentrates on City fields."
+            subtopic: "Sports fields",
+            text: "There’s Mahiko, Asing, and another park. Not enough fields, sports are year around now, parks never have time to heal. The community complaints fields are poorly maintained. DOE fields are often too expensive to rent, so league use concentrates on City fields. Baseball is a big thing here. Strong sports culture. Campbell HS football and girls flag football championships. Parks heavily used by local families and are central to community life."
           },
           {
             id: "b11",
@@ -459,7 +518,7 @@
           },
           {
             id: "b25",
-            subtopic: "Residents",
+            subtopic: "Residents demographics",
             text: "Many residents are local families getting their first home. Demographic has shifted from more rural / low-income perception to growing middle-class base. Emphasizes that Ewa community is strong: sports as central identity local teams and schools performing well."
           },
           {
@@ -494,7 +553,9 @@
     let labels = {};
     let colors = {};
     let placed = {};
-    let removed = {};
+    let secondary = {};
+    let removed = defaultRemoved();
+    let texts = {};
 
     function keyOf(name) {
       return String(name || "").trim().toLowerCase();
@@ -520,35 +581,82 @@
       return next;
     }
 
+    function defaultSecondary() {
+      const next = {};
+      SECTIONS.forEach(function (section) {
+        section.blocks.forEach(function (block) {
+          next[block.id] = START_SECONDARY[block.id] || "";
+        });
+      });
+      return next;
+    }
+
+    function defaultRemoved() {
+      const next = {};
+      Object.keys(START_REMOVED).forEach(function (id) { next[id] = true; });
+      return next;
+    }
+
     function load() {
       labels = defaultLabels();
       colors = {};
       placed = defaultPlaced();
-      removed = {};
+      secondary = defaultSecondary();
+      removed = defaultRemoved();
+      texts = {};
       try {
         const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
         if (saved && saved.labels) labels = Object.assign(labels, saved.labels);
         if (saved && saved.colors) colors = saved.colors;
         if (saved && saved.placed) placed = Object.assign(placed, saved.placed);
+        if (saved && saved.secondary) secondary = Object.assign(secondary, saved.secondary);
         if (saved && saved.removed) removed = saved.removed;
+        if (saved && saved.texts) texts = saved.texts;
       } catch (err) {
         labels = defaultLabels();
         colors = {};
         placed = defaultPlaced();
-        removed = {};
+        secondary = defaultSecondary();
+        removed = defaultRemoved();
+        texts = {};
       }
     }
 
     function save() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ labels: labels, colors: colors, placed: placed, removed: removed }));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        labels: labels,
+        colors: colors,
+        placed: placed,
+        secondary: secondary,
+        removed: removed,
+        texts: texts
+      }));
     }
 
-    function colorForBlock(block) {
-      const bucketId = placed[block.id] || "";
+    function noteBody(block) {
+      return Object.prototype.hasOwnProperty.call(texts, block.id) ? texts[block.id] : block.text;
+    }
+
+    function fitNote(field) {
+      field.style.height = "auto";
+      field.style.height = field.scrollHeight + "px";
+    }
+
+    function bucketOf(block, role) {
+      if (role === "secondary") return secondary[block.id] || "";
+      return placed[block.id] || "";
+    }
+
+    function inBucket(block, bucketId) {
+      if (removed[block.id]) return false;
+      if ((placed[block.id] || "") === bucketId) return true;
+      return (secondary[block.id] || "") === bucketId && (placed[block.id] || "") !== bucketId;
+    }
+
+    function colorForBlock(block, role) {
+      const bucketId = bucketOf(block, role);
       const family = FAMILIES[bucketId] || FAMILIES[""];
-      const mates = allBlocks().filter(function (item) {
-        return !removed[item.id] && (placed[item.id] || "") === bucketId;
-      });
+      const mates = allBlocks().filter(function (item) { return inBucket(item, bucketId); });
       const index = mates.findIndex(function (item) { return item.id === block.id; });
       return family.shades[Math.max(index, 0) % family.shades.length];
     }
@@ -561,20 +669,21 @@
       return list;
     }
 
-    function makeChip(block) {
+    function makeChip(block, role) {
       const name = (labels[block.id] || "").trim() || "Untitled";
+      const starred = role === "secondary";
       const chip = document.createElement("a");
       chip.className = "chip";
       chip.href = "#" + block.id;
       chip.draggable = true;
-      chip.style.background = colorForBlock(block);
+      chip.style.background = colorForBlock(block, role);
       const pid = document.createElement("span");
       pid.className = "pid";
       pid.textContent = block.id;
       chip.appendChild(pid);
-      chip.appendChild(document.createTextNode(name));
+      chip.appendChild(document.createTextNode(starred ? name + " *" : name));
       chip.addEventListener("dragstart", function (event) {
-        event.dataTransfer.setData("text/plain", block.id);
+        event.dataTransfer.setData("text/plain", block.id + (starred ? "|secondary" : ""));
         event.dataTransfer.effectAllowed = "move";
       });
       chip.addEventListener("click", function (event) {
@@ -600,9 +709,17 @@
       zone.addEventListener("drop", function (event) {
         event.preventDefault();
         zone.classList.remove("over");
-        const id = event.dataTransfer.getData("text/plain");
+        const raw = event.dataTransfer.getData("text/plain");
+        const parts = raw.split("|");
+        const id = parts[0];
+        const which = parts[1] || "primary";
         if (!id || !placed.hasOwnProperty(id)) return;
-        placed[id] = bucketId;
+        if (which === "secondary") {
+          secondary[id] = !bucketId || bucketId === (placed[id] || "") ? "" : bucketId;
+        } else {
+          placed[id] = bucketId;
+          if ((secondary[id] || "") === bucketId) secondary[id] = "";
+        }
         save();
         render();
       });
@@ -626,7 +743,7 @@
         hint.textContent = "Drag a tag here to take it out of a bucket.";
         tray.appendChild(hint);
       }
-      loose.forEach(function (block) { tray.appendChild(makeChip(block)); });
+      loose.forEach(function (block) { tray.appendChild(makeChip(block, "primary")); });
       wireZone(tray, "");
       board.appendChild(tray);
 
@@ -642,13 +759,17 @@
         title.style.color = family.ink;
         zone.appendChild(title);
         const inside = blocks.filter(function (block) { return placed[block.id] === bucket.id; });
-        if (!inside.length) {
+        const extra = blocks.filter(function (block) {
+          return (secondary[block.id] || "") === bucket.id && placed[block.id] !== bucket.id;
+        });
+        if (!inside.length && !extra.length) {
           const hint = document.createElement("p");
           hint.className = "hint";
           hint.textContent = "Drop tags here.";
           zone.appendChild(hint);
         }
-        inside.forEach(function (block) { zone.appendChild(makeChip(block)); });
+        inside.forEach(function (block) { zone.appendChild(makeChip(block, "primary")); });
+        extra.forEach(function (block) { zone.appendChild(makeChip(block, "secondary")); });
         wireZone(zone, bucket.id);
         board.appendChild(zone);
       });
@@ -671,7 +792,7 @@
         wrap.appendChild(h2);
         visible.forEach(function (block) {
           const name = labels[block.id] || "";
-          const color = colorForBlock(block);
+          const color = colorForBlock(block, "primary");
           const article = document.createElement("article");
           article.id = block.id;
           article.style.borderLeftColor = color;
@@ -697,28 +818,60 @@
             }
           });
           input.dataset.id = block.id;
+          function fillBucketSelect(select, blankLabel) {
+            [{ id: "", label: blankLabel }].concat(BUCKETS).forEach(function (bucket) {
+              const option = document.createElement("option");
+              option.value = bucket.id;
+              option.textContent = bucket.label;
+              select.appendChild(option);
+            });
+          }
+          const primaryField = document.createElement("label");
+          primaryField.className = "bucket-field";
+          const primaryCaption = document.createElement("span");
+          primaryCaption.textContent = "Primary";
           const where = document.createElement("select");
           where.className = "bucket-select";
-          where.setAttribute("aria-label", "Bucket for " + block.id);
+          where.setAttribute("aria-label", "Primary bucket for " + block.id);
           where.dataset.bucketFor = block.id;
-          [{ id: "", label: "Not placed" }].concat(BUCKETS).forEach(function (bucket) {
-            const option = document.createElement("option");
-            option.value = bucket.id;
-            option.textContent = bucket.label;
-            where.appendChild(option);
-          });
+          fillBucketSelect(where, "Not placed");
           where.value = placed[block.id] || "";
           where.addEventListener("change", function () {
             const y = window.scrollY;
             placed[block.id] = where.value;
+            if ((secondary[block.id] || "") === where.value) secondary[block.id] = "";
             save();
             render();
             window.scrollTo(0, y);
             const again = document.querySelector('[data-bucket-for="' + block.id + '"]');
             if (again) again.focus();
           });
+          primaryField.appendChild(primaryCaption);
+          primaryField.appendChild(where);
+          const secondaryField = document.createElement("label");
+          secondaryField.className = "bucket-field";
+          const secondaryCaption = document.createElement("span");
+          secondaryCaption.textContent = "Secondary";
+          const also = document.createElement("select");
+          also.className = "bucket-select secondary";
+          also.setAttribute("aria-label", "Secondary bucket for " + block.id);
+          also.dataset.secondaryFor = block.id;
+          fillBucketSelect(also, "None");
+          also.value = secondary[block.id] || "";
+          also.addEventListener("change", function () {
+            const y = window.scrollY;
+            secondary[block.id] = also.value && also.value !== (placed[block.id] || "") ? also.value : "";
+            save();
+            render();
+            window.scrollTo(0, y);
+            const again = document.querySelector('[data-secondary-for="' + block.id + '"]');
+            if (again) again.focus();
+          });
+          secondaryField.appendChild(secondaryCaption);
+          secondaryField.appendChild(also);
           row.appendChild(input);
-          row.appendChild(where);
+          row.appendChild(primaryField);
+          row.appendChild(secondaryField);
           const remove = document.createElement("button");
           remove.type = "button";
           remove.className = "remove-note";
@@ -733,15 +886,22 @@
             window.scrollTo(0, y);
           });
           row.appendChild(remove);
-          const text = document.createElement("p");
+          const text = document.createElement("textarea");
           text.className = "text";
-          text.textContent = block.text;
+          text.value = noteBody(block);
+          text.setAttribute("aria-label", "Note text for " + block.id);
+          text.addEventListener("input", function () {
+            texts[block.id] = text.value;
+            save();
+            fitNote(text);
+          });
           article.appendChild(row);
           article.appendChild(text);
           wrap.appendChild(article);
           if (seen.indexOf(keyOf(name) || "untitled") === -1) seen.push(keyOf(name) || "untitled");
         });
         doc.appendChild(wrap);
+        wrap.querySelectorAll("textarea.text").forEach(fitNote);
       });
 
       const named = {};
@@ -761,7 +921,7 @@
         const sample = allBlocks().find(function (block) {
           return (keyOf(labels[block.id]) || "untitled") === key;
         });
-        swatch.style.background = sample ? colorForBlock(sample) : FAMILIES[""].shades[0];
+        swatch.style.background = sample ? colorForBlock(sample, "primary") : FAMILIES[""].shades[0];
         button.appendChild(swatch);
         button.appendChild(document.createTextNode(named[key]));
         button.addEventListener("click", function () {
@@ -779,18 +939,8 @@
     }
 
     const meetingDate = document.getElementById("meeting-date");
-    meetingDate.value = window.interviewDate(INTERVIEW_ID);
-    meetingDate.addEventListener("input", function () {
-      window.saveInterviewDate(INTERVIEW_ID, meetingDate.value);
-    });
-
-    document.getElementById("meta").textContent = "Source file: notes/" + SOURCE;
-    document.getElementById("reset").addEventListener("click", function () {
-      if (!confirm("Reset subtopic names, colors, bucket placement, and removed notes to the first pass?")) return;
-      localStorage.removeItem(STORAGE_KEY);
-      load();
-      render();
-    });
+    const catalog = (window.INTERVIEWS || []).find(function (row) { return row.id === INTERVIEW_ID; });
+    meetingDate.textContent = catalog && catalog.date ? catalog.date : "";
 
     load();
     render();

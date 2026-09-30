@@ -56,20 +56,35 @@
       padding: 0.28rem 0.65rem;
       text-decoration: none;
     }
-    .date-row { margin: 0.35rem 0 0; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--grey); }
-    .date-row input {
-      font: inherit;
+    .date-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 0.35rem 0 0;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+    .date-row .date-value {
       font-size: 0.9rem;
       font-weight: 400;
       letter-spacing: 0;
       text-transform: none;
       color: var(--ink);
+    }
+    .date-row a {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--navy);
       background: #fff;
       border: 1px solid var(--navy);
-      padding: 0.2rem 0.45rem;
-      width: 10rem;
+      padding: 0.28rem 0.65rem;
+      text-decoration: none;
     }
-    .meta { margin-top: 0.25rem; }
     main { max-width: 1180px; margin: 0 auto; padding: 1.1rem 1.25rem 4rem; }
     .board {
       display: grid;
@@ -84,9 +99,22 @@
       border-radius: 0;
       padding: 10px;
     }
-    .zone.tray { grid-column: 1 / -1; background: #fff8e8; }
+    .zone.tray {
+      grid-column: 2 / span 3;
+      grid-row: 3;
+      background: #fff8e8;
+    }
+    .zone[data-bucket="other"] {
+      grid-column: 1;
+      grid-row: 3;
+    }
     @media (max-width: 900px) {
       .board { grid-template-columns: 1fr 1fr; }
+      .zone.tray,
+      .zone[data-bucket="other"] {
+        grid-column: auto;
+        grid-row: auto;
+      }
     }
     .zone.over { border-color: var(--navy); background: #eef0f8; }
     .zone h3 { margin: 0 0 8px; font-size: 16px; }
@@ -255,17 +283,6 @@
       outline: none;
       border-color: var(--navy);
     }
-    .toolbar { margin-top: 8px; }
-    .toolbar button {
-      font: inherit;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--navy);
-      border: 1px solid var(--navy);
-      background: #fff;
-      padding: 0.35rem 0.75rem;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
@@ -274,11 +291,7 @@
       <img class="logo" src="assets/ewa-dp-logo.png" alt="ʻEwa Development Plan">
       <div class="header-text">
         <h1>BWS</h1>
-        <p class="date-row"><label>Date <input id="meeting-date" type="text" placeholder="Enter a date" aria-label="Meeting date"></label></p>
-        <p>Participants: Ernest Lau, Chief Engineer; Barry Usagawa, Program Administrator; Dominic Dias, Civil Engineer</p>
-        <p>Each note is bws-01, bws-02, and so on, taken from the updated BWS write-up. Primary and secondary buckets are a first estimate and can be changed. A secondary choice also files that note in a second bucket and marks the copy with *. The note text can be edited in place.</p>
-        <p class="meta" id="meta"></p>
-        <div class="header-tools"><a href="Tulba_index.html">All interviews</a></div>
+        <p class="date-row">Date <span class="date-value" id="meeting-date"></span> <a href="Tulba_index.html">All interviews</a></p>
       </div>
     </div>
   </header>
@@ -286,14 +299,10 @@
     <div class="board" id="board"></div>
     <div class="legend" id="legend"></div>
     <div id="doc"></div>
-    <div class="toolbar">
-      <button id="reset" type="button">Reset labels, colors, and buckets</button>
-    </div>
   </main>
   <script src="interviews.js"></script>
   <script>
     const INTERVIEW_ID = "bws";
-    const SOURCE = "BWS .docx";
     const FAMILIES = {
       infrastructure: { wash: "#fff3e8", ink: "#8a4b12", shades: ["#ffd7ad", "#ffc894", "#ffb878", "#ffe6cc"] },
       "land-use": { wash: "#f6f0ff", ink: "#5b3d91", shades: ["#e3d4ff", "#d4c2fb", "#c9b6f6", "#efe6ff"] },
@@ -306,7 +315,7 @@
       other: { wash: "#f4f4f6", ink: "#3d4454", shades: ["#d9dde8", "#c8cedc", "#b7c0d2", "#e6e9f0"] },
       "": { wash: "#fff8e8", ink: "#5e584f", shades: ["#efeae2", "#e7e0d4", "#f6f1e8", "#e4ddd2"] }
     };
-    const STORAGE_KEY = "bws-buckets-v2";
+    const STORAGE_KEY = "bws-buckets-v3";
     const BUCKETS = [
       { id: "infrastructure", label: "Infrastructure" },
       { id: "land-use", label: "Land use urban form" },
@@ -322,74 +331,61 @@
       "bws-01": "infrastructure",
       "bws-02": "infrastructure",
       "bws-03": "sustainability",
-      "bws-04": "infrastructure",
-      "bws-05": "sustainability",
+      "bws-04": "sustainability",
+      "bws-05": "land-use",
       "bws-06": "land-use",
-      "bws-07": "infrastructure",
-      "bws-08": "land-use",
-      "bws-09": "land-use",
-      "bws-10": "sustainability",
+      "bws-07": "sustainability",
+      "bws-08": "sustainability",
+      "bws-09": "sustainability",
+      "bws-10": "infrastructure",
       "bws-11": "sustainability",
-      "bws-12": "sustainability",
+      "bws-12": "infrastructure",
       "bws-13": "infrastructure",
       "bws-14": "infrastructure",
       "bws-15": "sustainability",
-      "bws-16": "infrastructure",
-      "bws-17": "infrastructure",
+      "bws-16": "sustainability",
+      "bws-17": "sustainability",
       "bws-18": "infrastructure",
-      "bws-19": "sustainability",
-      "bws-20": "sustainability",
-      "bws-21": "sustainability",
-      "bws-22": "infrastructure",
-      "bws-23": "infrastructure",
+      "bws-19": "infrastructure",
+      "bws-20": "infrastructure",
+      "bws-21": "infrastructure",
+      "bws-22": "land-use",
+      "bws-23": "other",
       "bws-24": "infrastructure",
-      "bws-25": "infrastructure",
-      "bws-26": "land-use",
-      "bws-27": "other",
-      "bws-28": "infrastructure",
-      "bws-29": "land-use",
-      "bws-30": "land-use"
-    }
+      "bws-25": "land-use",
+      "bws-26": "land-use"
+    };
 
     const START_SECONDARY = {
       "bws-01": "sustainability",
       "bws-02": "land-use",
       "bws-03": "infrastructure",
-      "bws-04": "econ",
-      "bws-05": "infrastructure",
+      "bws-04": "infrastructure",
+      "bws-05": "sustainability",
       "bws-06": "sustainability",
       "bws-07": "land-use",
-      "bws-08": "sustainability",
-      "bws-09": "infrastructure",
-      "bws-10": "land-use",
-      "bws-11": "infrastructure",
-      "bws-12": "land-use",
+      "bws-08": "infrastructure",
+      "bws-09": "land-use",
+      "bws-10": "sustainability",
+      "bws-11": "land-use",
+      "bws-12": "sustainability",
       "bws-13": "sustainability",
-      "bws-14": "land-use",
-      "bws-15": "land-use",
-      "bws-16": "sustainability",
-      "bws-17": "sustainability",
+      "bws-14": "sustainability",
+      "bws-15": "infrastructure",
+      "bws-16": "econ",
+      "bws-17": "infrastructure",
       "bws-18": "sustainability",
-      "bws-19": "infrastructure",
-      "bws-20": "econ",
-      "bws-21": "infrastructure",
+      "bws-20": "land-use",
+      "bws-21": "land-use",
       "bws-22": "sustainability",
-      "bws-24": "land-use",
-      "bws-25": "land-use",
-      "bws-26": "sustainability",
-      "bws-27": "land-use",
-      "bws-28": "sustainability",
-      "bws-29": "infrastructure",
-      "bws-30": "infrastructure"
-    }
-
-
-    const START_REMOVED = {
-      "bws-04": true,
-      "bws-07": true,
-      "bws-09": true,
-      "bws-14": true
+      "bws-23": "land-use",
+      "bws-24": "sustainability",
+      "bws-25": "infrastructure",
+      "bws-26": "infrastructure"
     };
+
+
+    const START_REMOVED = {};
 
     const SECTIONS = [
       {
@@ -398,7 +394,6 @@
           { id: "b", subtopic: "Private water system", text: "Kalaeloa’s potable water is provided by the privately operated Hawaiʻi/Kalaeloa Water Company under Public Utilities Commission oversight. BWS is concerned that it could eventually inherit responsibility for Kalaeloa’s water system, similar to what occurred in the City of Kapolei." },
           { id: "b", subtopic: "Service boundaries and capacity", text: "BWS wants to respect existing water-service boundaries but noted that the Kalaeloa system is already at or near capacity while additional subdivisions are being pursued." },
           { id: "b", subtopic: "R-1 to free capacity", text: "Expanded use of R-1 recycled water could reduce potable-water demand and free capacity for additional development, but progress on the necessary planning and investment has been slow." },
-          { id: "b", subtopic: "Later BWS responsibility", text: "BWS is concerned that it could eventually inherit responsibility for Kalaeloa’s water system, similar to what occurred in the City of Kapolei." },
           { id: "b", subtopic: "Aquifer yield", text: "Kalaeloa draws from the ʻEwa-Waipahu aquifer system. Its sustainable yield may decrease over time, while the same aquifer system is also supporting water demand along the Waiʻanae Coast." },
         ]
       },
@@ -406,9 +401,7 @@
         heading: "Constraints & permitting",
         blocks: [
           { id: "b", subtopic: "How much growth", text: "Limited water resources raise a fundamental community question about how much additional growth the region can support and what viable long-term water sources could serve that growth. BWS does not provide advance water commitments. For master-planned developments, formal commitments generally occur later, when impact fees are assessed." },
-          { id: "b", subtopic: "No advance commitments", text: "BWS does not provide advance water commitments. For master-planned developments, formal commitments generally occur later, when impact fees are assessed." },
           { id: "b", subtopic: "TOD and HCDA capacity", text: "Planned TOD and HCDA development may not receive sufficient additional capacity without new water sources, aggressive conservation, and expanded water reuse. BWS needs more reliable estimates of the scale and timing of TOD buildout to evaluate future water demand and infrastructure needs." },
-          { id: "b", subtopic: "TOD buildout estimates", text: "BWS needs more reliable estimates of the scale and timing of TOD buildout to evaluate future water demand and infrastructure needs." },
           { id: "b", subtopic: "Waianae Water Management Area", text: "BWS has petitioned to designate the Waiʻanae Coast, from Nānākuli to Kaʻena Point, as a Water Management Area. This would create more consistent regional management but add permitting requirements for water use." },
         ]
       },
@@ -418,7 +411,6 @@
           { id: "b", subtopic: "Diversified water system", text: "ʻEwa needs a diversified water system that combines potable water, recycled water, conservation, greywater reuse, and other on-site systems." },
           { id: "b", subtopic: "How far to require R-1", text: "Determining how extensively R-1 water should be required for irrigation and other nonpotable uses is an important planning and policy decision." },
           { id: "b", subtopic: "R-1 capacity and connection", text: "R-1 water has available capacity and can be used to irrigate crops, but the regional distribution system is not yet fully connected. Planned R-1 extensions could serve areas such as UH West Oʻahu, Kalaeloa, Grace Pacific lands, Laulani, and other master-planned communities." },
-          { id: "b", subtopic: "R-1 extensions", text: "Planned R-1 extensions could serve areas such as UH West Oʻahu, Kalaeloa, Grace Pacific lands, Laulani, and other master-planned communities." },
           { id: "b", subtopic: "On-site reuse", text: "New developments should incorporate on-site reuse, conservation, and other measures that reduce dependence on potable water." },
           { id: "b", subtopic: "Centralized reuse system", text: "BWS supports a more centralized system that collects and treats water and then distributes it for reuse where appropriate." },
           { id: "b", subtopic: "Wastewater collection integrity", text: "BWS is coordinating with ENV on wastewater collection-system integrity because the wastewater system is an important part of the region’s overall water-resource strategy." },
@@ -863,18 +855,8 @@
     }
 
     const meetingDate = document.getElementById("meeting-date");
-    meetingDate.value = window.interviewDate(INTERVIEW_ID);
-    meetingDate.addEventListener("input", function () {
-      window.saveInterviewDate(INTERVIEW_ID, meetingDate.value);
-    });
-
-    document.getElementById("meta").textContent = "Source file: notes/" + SOURCE;
-    document.getElementById("reset").addEventListener("click", function () {
-      if (!confirm("Reset subtopic names, note text, colors, primary and secondary buckets, and removed notes to the first pass?")) return;
-      localStorage.removeItem(STORAGE_KEY);
-      load();
-      render();
-    });
+    const catalog = (window.INTERVIEWS || []).find(function (row) { return row.id === INTERVIEW_ID; });
+    meetingDate.textContent = catalog && catalog.date ? catalog.date : "";
 
     load();
     render();
