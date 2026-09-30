@@ -133,6 +133,20 @@
       border-color: var(--navy);
       color: var(--ink);
     }
+    .bucket-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      flex: none;
+    }
+    .bucket-field span {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+    .bucket-select.secondary { border-style: dashed; }
     .remove-note {
       flex: none;
       width: 1.7rem;
@@ -220,12 +234,26 @@
       outline: none;
       border-color: var(--navy);
     }
-    p.text {
+    textarea.text {
+      display: block;
+      width: 100%;
       margin: 0;
+      resize: vertical;
+      min-height: 2.6rem;
+      overflow: hidden;
       white-space: pre-wrap;
+      overflow-wrap: break-word;
+      font: inherit;
       font-size: 0.88rem;
       line-height: 1.4;
       color: var(--ink);
+      background: #fff;
+      border: 1px solid transparent;
+      padding: 0.2rem 0.35rem;
+    }
+    textarea.text:focus {
+      outline: none;
+      border-color: var(--navy);
     }
     .toolbar { margin-top: 8px; }
     .toolbar button {
@@ -247,7 +275,8 @@
       <div class="header-text">
         <h1>BWS</h1>
         <p class="date-row"><label>Date <input id="meeting-date" type="text" placeholder="Enter a date" aria-label="Meeting date"></label></p>
-        <p>Each note is bws-01, bws-02, and so on. Drag a tag into a bucket. Tags left in “Not placed” were not filed, because more than one bucket could fit.</p>
+        <p>Participants: Ernest Lau, Chief Engineer; Barry Usagawa, Program Administrator; Dominic Dias, Civil Engineer</p>
+        <p>Each note is bws-01, bws-02, and so on, taken from the updated BWS write-up. Primary and secondary buckets are a first estimate and can be changed. A secondary choice also files that note in a second bucket and marks the copy with *. The note text can be edited in place.</p>
         <p class="meta" id="meta"></p>
         <div class="header-tools"><a href="Tulba_index.html">All interviews</a></div>
       </div>
@@ -277,7 +306,7 @@
       other: { wash: "#f4f4f6", ink: "#3d4454", shades: ["#d9dde8", "#c8cedc", "#b7c0d2", "#e6e9f0"] },
       "": { wash: "#fff8e8", ink: "#5e584f", shades: ["#efeae2", "#e7e0d4", "#f6f1e8", "#e4ddd2"] }
     };
-    const STORAGE_KEY = "bws-buckets-v1";
+    const STORAGE_KEY = "bws-buckets-v2";
     const BUCKETS = [
       { id: "infrastructure", label: "Infrastructure" },
       { id: "land-use", label: "Land use urban form" },
@@ -292,144 +321,145 @@
     const START_BUCKET = {
       "bws-01": "infrastructure",
       "bws-02": "infrastructure",
-      "bws-03": "infrastructure",
+      "bws-03": "sustainability",
       "bws-04": "infrastructure",
-      "bws-05": "infrastructure",
-      "bws-06": "sustainability",
-      "bws-07": "land-use",
+      "bws-05": "sustainability",
+      "bws-06": "land-use",
+      "bws-07": "infrastructure",
       "bws-08": "land-use",
-      "bws-09": "sustainability",
-      "bws-10": "infrastructure",
+      "bws-09": "land-use",
+      "bws-10": "sustainability",
       "bws-11": "sustainability",
-      "bws-12": "land-use",
-      "bws-13": "land-use",
-      "bws-14": "sustainability",
+      "bws-12": "sustainability",
+      "bws-13": "infrastructure",
+      "bws-14": "infrastructure",
       "bws-15": "sustainability",
       "bws-16": "infrastructure",
       "bws-17": "infrastructure",
-      "bws-18": "land-use",
-      "bws-20": "infrastructure",
+      "bws-18": "infrastructure",
+      "bws-19": "sustainability",
+      "bws-20": "sustainability",
+      "bws-21": "sustainability",
       "bws-22": "infrastructure",
-      "bws-23": "sustainability",
-      "bws-25": "econ",
-      "bws-26": "econ",
-      "bws-27": "sustainability",
+      "bws-23": "infrastructure",
+      "bws-24": "infrastructure",
+      "bws-25": "infrastructure",
+      "bws-26": "land-use",
+      "bws-27": "other",
+      "bws-28": "infrastructure",
+      "bws-29": "land-use",
+      "bws-30": "land-use"
+    }
+
+    const START_SECONDARY = {
+      "bws-01": "sustainability",
+      "bws-02": "land-use",
+      "bws-03": "infrastructure",
+      "bws-04": "econ",
+      "bws-05": "infrastructure",
+      "bws-06": "sustainability",
+      "bws-07": "land-use",
+      "bws-08": "sustainability",
+      "bws-09": "infrastructure",
+      "bws-10": "land-use",
+      "bws-11": "infrastructure",
+      "bws-12": "land-use",
+      "bws-13": "sustainability",
+      "bws-14": "land-use",
+      "bws-15": "land-use",
+      "bws-16": "sustainability",
+      "bws-17": "sustainability",
+      "bws-18": "sustainability",
+      "bws-19": "infrastructure",
+      "bws-20": "econ",
+      "bws-21": "infrastructure",
+      "bws-22": "sustainability",
+      "bws-24": "land-use",
+      "bws-25": "land-use",
+      "bws-26": "sustainability",
+      "bws-27": "land-use",
       "bws-28": "sustainability",
       "bws-29": "infrastructure",
-      "bws-31": "sustainability",
-      "bws-33": "infrastructure",
-      "bws-34": "other",
-      "bws-36": "sustainability",
-      "bws-37": "sustainability",
-      "bws-39": "sustainability",
-      "bws-40": "sustainability",
-      "bws-41": "infrastructure",
-      "bws-42": "infrastructure",
-      "bws-43": "infrastructure",
-      "bws-44": "econ",
-      "bws-46": "econ",
-      "bws-49": "infrastructure",
-      "bws-50": "infrastructure",
-      "bws-51": "infrastructure",
-      "bws-54": "infrastructure",
-      "bws-56": "other",
+      "bws-30": "infrastructure"
+    }
+
+
+    const START_REMOVED = {
+      "bws-04": true,
+      "bws-07": true,
+      "bws-09": true,
+      "bws-14": true
     };
 
     const SECTIONS = [
       {
         heading: "Kalaeloa water system",
         blocks: [
-          { id: "b1", subtopic: "Private water system", text: "HCDA in Kalaeloa, potable water in Kalaeloa served by a private system (HI/Kalaeloa Water Co.) under Public Utility Commission (PUC); City/BWS wants to respect service area boundaries." },
-          { id: "b2", subtopic: "Out of capacity", text: "Kalaeloa is out of capacity, Hunt trying to do more subdivisions." },
-          { id: "b3", subtopic: "R1 recycled water", text: "City could provide a lot more R1 recycled water (not potable water); progress slow, haven’t seen much plan or investment." },
-          { id: "b4", subtopic: "Later BWS burden", text: "Worry about it will be BWS burden later, like City of Kapolei." },
-          { id: "b5", subtopic: "Free up potable capacity", text: "free up potable water capacity then can grow more" },
-          { id: "b6", subtopic: "Aquifer yields", text: "Kalaeloa draws from Ewa/Waipahu aquifers; sustainable yields likely to decrease over time; Commission on Water Resource Management trends downward; prob likely to get more permitted use. The Waianae region is currently bringing water in from Ewa/Waipahu." },
+          { id: "b", subtopic: "Private water system", text: "Kalaeloa’s potable water is provided by the privately operated Hawaiʻi/Kalaeloa Water Company under Public Utilities Commission oversight. BWS is concerned that it could eventually inherit responsibility for Kalaeloa’s water system, similar to what occurred in the City of Kapolei." },
+          { id: "b", subtopic: "Service boundaries and capacity", text: "BWS wants to respect existing water-service boundaries but noted that the Kalaeloa system is already at or near capacity while additional subdivisions are being pursued." },
+          { id: "b", subtopic: "R-1 to free capacity", text: "Expanded use of R-1 recycled water could reduce potable-water demand and free capacity for additional development, but progress on the necessary planning and investment has been slow." },
+          { id: "b", subtopic: "Later BWS responsibility", text: "BWS is concerned that it could eventually inherit responsibility for Kalaeloa’s water system, similar to what occurred in the City of Kapolei." },
+          { id: "b", subtopic: "Aquifer yield", text: "Kalaeloa draws from the ʻEwa-Waipahu aquifer system. Its sustainable yield may decrease over time, while the same aquifer system is also supporting water demand along the Waiʻanae Coast." },
         ]
       },
       {
         heading: "Constraints & permitting",
         blocks: [
-          { id: "b7", subtopic: "Why grow", text: "Community: why grow if water resources are limited? (Good question.  Will need to seek clarity from BWS on what new sources for development are viable to be pursued for the long term)" },
-          { id: "b8", subtopic: "No advance commitments", text: "No advance water commitments (advanced permits) by BWS" },
-          { id: "b9", subtopic: "Conservation reuse", text: "Free up capacity: conservation reuse, see no plan doing it." },
-          { id: "b10", subtopic: "Leeward water transfer", text: "Dryer on leeward coat, bring water from Ewa Waipahu for Waianae coast" },
-          { id: "b11", subtopic: "Aggressive conservation", text: "BWS stresses the important of aggressive conservation and reuse" },
-          { id: "b12", subtopic: "TOD entitlements", text: "HCDA and planned TOD will not be able to get entitlements to much more capacity without new sources and aggressive reuse. Capacity issues cannot be solved solely by the City. State and private sector need to get involved." },
-          { id: "b13", subtopic: "TOD buildout estimates", text: "Need better estimates and timeframe for TOD buildout." },
-          { id: "b14", subtopic: "Waianae Water Management Area", text: "Regional context: BWS has applied for the whole Waianae Coast to be a uniform Water Management Area under the state meaning there would be an extra layer for water use permissions (Nanakuli to Kaena Point)" },
+          { id: "b", subtopic: "How much growth", text: "Limited water resources raise a fundamental community question about how much additional growth the region can support and what viable long-term water sources could serve that growth. BWS does not provide advance water commitments. For master-planned developments, formal commitments generally occur later, when impact fees are assessed." },
+          { id: "b", subtopic: "No advance commitments", text: "BWS does not provide advance water commitments. For master-planned developments, formal commitments generally occur later, when impact fees are assessed." },
+          { id: "b", subtopic: "TOD and HCDA capacity", text: "Planned TOD and HCDA development may not receive sufficient additional capacity without new water sources, aggressive conservation, and expanded water reuse. BWS needs more reliable estimates of the scale and timing of TOD buildout to evaluate future water demand and infrastructure needs." },
+          { id: "b", subtopic: "TOD buildout estimates", text: "BWS needs more reliable estimates of the scale and timing of TOD buildout to evaluate future water demand and infrastructure needs." },
+          { id: "b", subtopic: "Waianae Water Management Area", text: "BWS has petitioned to designate the Waiʻanae Coast, from Nānākuli to Kaʻena Point, as a Water Management Area. This would create more consistent regional management but add permitting requirements for water use." },
         ]
       },
       {
         heading: "Diverse water system in Ewa",
         blocks: [
-          { id: "b15", subtopic: "How far to take R-1", text: "R-1 water is used for irrigation, how far do you take this?  This is a planning policy call." },
-          { id: "b16", subtopic: "Leeward groundwater designation", text: "Designation: bws petition to designate leeward Coast as a groundwater management area to unify management, the last area on Oahu. Will cause more permitting and requirements." },
-          { id: "b17", subtopic: "Redhill shutdown", text: "Redhill shutdown" },
-          { id: "b18", subtopic: "Commitment at impact fee", text: "Diverse water system, master planned community, approved master plan yes but commitment happens at impact fee." },
-          { id: "b19", subtopic: "EK TOD area", text: "EK TOD area" },
-          { id: "b20", subtopic: "R1 system not up", text: "R1 has capacity, system not up yet" },
-          { id: "b21", subtopic: "Grace pacific land", text: "Grace pacific land" },
-          { id: "b22", subtopic: "Dual system not connected", text: "Dual system not connected yet: extending R1 toward UH West Oahu, Kalaeloa, laulani master-plan in progress but not fully connected." },
-          { id: "b23", subtopic: "R1 irrigates crops", text: "R1 can irrigate all crops" },
-          { id: "b24", subtopic: "R1 by 2045", text: "R1 for gov, by 2045 use domestic water; require for Aloha stadium for R1" },
-          { id: "b25", subtopic: "Fund backbone", text: "Cost support: state and private sector help fund backbone infrastructure" },
-          { id: "b26", subtopic: "BWS rates", text: "BWS relies primarily on rates" },
-          { id: "b27", subtopic: "Onsite conservation", text: "Developments look at onsite reduce, conservation, reduce dependence on potable water" },
-          { id: "b28", subtopic: "Aggressive on-site reuse", text: "We need extreme, aggressive conservation measures that emphasizes on-site re-use.  The overall goal is to reduce the use of potable water." },
-          { id: "b29", subtopic: "Centralized water solution", text: "Need a centralized solution – to collect, treat, and distribute water resource." },
-          { id: "b30", subtopic: "OneWater", text: "OneWater" },
-          { id: "b31", subtopic: "Kobayashi greywater", text: "Onsite reuse greywater by Kobayashi group." },
-          { id: "b32", subtopic: "Treat centrally, reuse onsite", text: "Collect water, treat centrally, then reuse onsite." },
-          { id: "b33", subtopic: "ENV collection system", text: "Work with on ENV collection system integrity" },
-          { id: "b34", subtopic: "One Water in the Plan", text: "One Water principles should be embedded into the Plan" },
+          { id: "b", subtopic: "Diversified water system", text: "ʻEwa needs a diversified water system that combines potable water, recycled water, conservation, greywater reuse, and other on-site systems." },
+          { id: "b", subtopic: "How far to require R-1", text: "Determining how extensively R-1 water should be required for irrigation and other nonpotable uses is an important planning and policy decision." },
+          { id: "b", subtopic: "R-1 capacity and connection", text: "R-1 water has available capacity and can be used to irrigate crops, but the regional distribution system is not yet fully connected. Planned R-1 extensions could serve areas such as UH West Oʻahu, Kalaeloa, Grace Pacific lands, Laulani, and other master-planned communities." },
+          { id: "b", subtopic: "R-1 extensions", text: "Planned R-1 extensions could serve areas such as UH West Oʻahu, Kalaeloa, Grace Pacific lands, Laulani, and other master-planned communities." },
+          { id: "b", subtopic: "On-site reuse", text: "New developments should incorporate on-site reuse, conservation, and other measures that reduce dependence on potable water." },
+          { id: "b", subtopic: "Centralized reuse system", text: "BWS supports a more centralized system that collects and treats water and then distributes it for reuse where appropriate." },
+          { id: "b", subtopic: "Wastewater collection integrity", text: "BWS is coordinating with ENV on wastewater collection-system integrity because the wastewater system is an important part of the region’s overall water-resource strategy." },
         ]
       },
       {
         heading: "Water demand",
         blocks: [
-          { id: "b35", subtopic: "TOD water need", text: "TOD build out’s need for water need to clarify" },
-          { id: "b36", subtopic: "Watershed plan missing SLR", text: "Draft watershed mngt plan, missing SLR content" },
-          { id: "b37", subtopic: "Watershed Management Plan", text: "Storm strategic plan, bws strategic plan, infrastructure investment plan, water master plan? Updating now BWS Watershed Management Plan (WMP) for Ewa was put aside 8 years ago and the update still needs to be finished.  They will pick this back up to synch with Ewa DP." },
-          { id: "b38", subtopic: "SLR and wastewater", text: "SLR salinity risk, seawater coming into waste water, risk. Waste water important for bws too. Check Waste water plan" },
-          { id: "b39", subtopic: "Use less, pay less", text: "BWS and ENV are working together to promote a “use less, pay less” model and incentivize conservation through the water sensible rebate program" },
-          { id: "b40", subtopic: "PFAS in RO", text: "PFAS  in RO (not in R1) recycled water limits where it can be used." },
-          { id: "b41", subtopic: "More treatment and plant", text: "Future need for more treatment and plant" },
+          { id: "b", subtopic: "Watershed Management Plan", text: "BWS’s ʻEwa Watershed Management Plan update was set aside approximately eight years ago and still needs to be completed. BWS intends to resume the work and coordinate it with the ʻEwa Development Plan update." },
+          { id: "b", subtopic: "Sea-level rise and salinity", text: "Water planning should address sea-level-rise and salinity risks, including the possibility of seawater entering wastewater infrastructure and affecting future recycled-water supplies." },
+          { id: "b", subtopic: "Use less, pay less", text: "BWS and ENV are promoting a “use less, pay less” approach and encouraging conservation through programs such as the Water Sensible rebate program." },
+          { id: "b", subtopic: "PFAS in reverse osmosis", text: "PFAS in reverse-osmosis recycled water—not R-1 recycled water—may limit where that water can be used." },
+          { id: "b", subtopic: "More treatment capacity", text: "Additional treatment capacity and facilities may be needed to meet the region’s long-term water demand and water-quality requirements." },
         ]
       },
       {
         heading: "Cost sharing",
         blocks: [
-          { id: "b42", subtopic: "Water system backbone", text: "Water system backbone: well, transmission main…" },
-          { id: "b43", subtopic: "Developer installs onsite system", text: "Onsite water system: developer to install" },
-          { id: "b44", subtopic: "Hookup fee", text: "Smaller dev: hookup fee" },
-          { id: "b45", subtopic: "Larger developments", text: "Larger: build some backbone, in the master plan review" },
-          { id: "b46", subtopic: "State land rich cash poor", text: "State land rich cash poor" },
-          { id: "b47", subtopic: "Tier water use and sewer", text: "Tier water use and sewer" },
+          { id: "b", subtopic: "Water system backbone", text: "Major water-system infrastructure includes backbone components such as wells, treatment facilities, storage, and transmission mains." },
+          { id: "b", subtopic: "Connection fees and backbone", text: "Smaller developments generally pay connection fees, while larger master-planned developments may be required to construct portions of the water-system backbone through the development-review process." },
+          { id: "b", subtopic: "Shared funding", text: "Water-capacity issues cannot be resolved solely by BWS or the City. State agencies and private developers should help fund regional backbone infrastructure, particularly because BWS relies primarily on customer rates and the State may be land-rich but funding-constrained." },
         ]
       },
       {
         heading: "Plans integration",
         blocks: [
-          { id: "b48", subtopic: "Watershed plan and EDP", text: "Sub-objectives, land to water, watershed plan & EDP\nShould be updated in tandem" },
+          { id: "b", subtopic: "Plans in tandem", text: "The ʻEwa Development Plan and the ʻEwa Watershed Management Plan should be updated in tandem so that land-use policies are directly connected to water availability, watershed conditions, infrastructure capacity, conservation, and reuse." },
+          { id: "b", subtopic: "One Water in the Plan", text: "One Water principles should be embedded throughout the ʻEwa Development Plan, including its objectives, policies, and implementation actions." },
         ]
       },
       {
         heading: "Desalination plant",
         blocks: [
-          { id: "b49", subtopic: "Build the desal plant", text: "Build it" },
-          { id: "b50", subtopic: "Running in 2-3 years", text: "Want to get it running 2-3 years" },
-          { id: "b51", subtopic: "Desal before new wells", text: "The desal plant could be online long before new well sources could be operating" },
+          { id: "b", subtopic: "Desalination plant", text: "BWS supports advancing the proposed desalination plant and would like it to become operational within approximately two to three years. It could provide a new water source considerably sooner than new groundwater wells." },
         ]
       },
       {
         heading: "Fire risk",
         blocks: [
-          { id: "b52", subtopic: "Wildfire exposure", text: "Ewa are high wildfire risk, makakilo very exposed" },
-          { id: "b53", subtopic: "Fire through design", text: "Passive respond to fire; Development Plans, reduce the rink through design" },
-          { id: "b54", subtopic: "Wildland fires", text: "Cannot design water systems to fight major wildland fires" },
-          { id: "b55", subtopic: "Fire protection spacing", text: "Fire protection standards, spacing, for higher density development such as TOD" },
-          { id: "b56", subtopic: "Firewise standards", text: "Look at Firewise Communities standards for wildland/urban interface" },
+          { id: "b", subtopic: "Wildfire exposure", text: "ʻEwa has substantial wildfire exposure, particularly in Makakilo and other areas along the wildland-urban interface. Water systems cannot reasonably be designed to suppress major wildland fires, so land-use and site-design measures must also reduce risk." },
+          { id: "b", subtopic: "Fire protection and Firewise", text: "Higher-density areas, including TOD districts, should be evaluated for appropriate fire-protection standards, building spacing, and infrastructure capacity. Firewise Communities standards may provide useful guidance for development near the wildland-urban interface." },
         ]
       },
     ];
@@ -447,7 +477,9 @@
     let labels = {};
     let colors = {};
     let placed = {};
-    let removed = {};
+    let secondary = {};
+    let removed = defaultRemoved();
+    let texts = {};
 
     function keyOf(name) {
       return String(name || "").trim().toLowerCase();
@@ -473,35 +505,82 @@
       return next;
     }
 
+    function defaultSecondary() {
+      const next = {};
+      SECTIONS.forEach(function (section) {
+        section.blocks.forEach(function (block) {
+          next[block.id] = START_SECONDARY[block.id] || "";
+        });
+      });
+      return next;
+    }
+
+    function defaultRemoved() {
+      const next = {};
+      Object.keys(START_REMOVED).forEach(function (id) { next[id] = true; });
+      return next;
+    }
+
     function load() {
       labels = defaultLabels();
       colors = {};
       placed = defaultPlaced();
-      removed = {};
+      secondary = defaultSecondary();
+      removed = defaultRemoved();
+      texts = {};
       try {
         const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
         if (saved && saved.labels) labels = Object.assign(labels, saved.labels);
         if (saved && saved.colors) colors = saved.colors;
         if (saved && saved.placed) placed = Object.assign(placed, saved.placed);
+        if (saved && saved.secondary) secondary = saved.secondary;
         if (saved && saved.removed) removed = saved.removed;
+        if (saved && saved.texts) texts = saved.texts;
       } catch (err) {
         labels = defaultLabels();
         colors = {};
         placed = defaultPlaced();
-        removed = {};
+        secondary = defaultSecondary();
+        removed = defaultRemoved();
+        texts = {};
       }
     }
 
     function save() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ labels: labels, colors: colors, placed: placed, removed: removed }));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        labels: labels,
+        colors: colors,
+        placed: placed,
+        secondary: secondary,
+        removed: removed,
+        texts: texts
+      }));
     }
 
-    function colorForBlock(block) {
-      const bucketId = placed[block.id] || "";
+    function noteBody(block) {
+      return Object.prototype.hasOwnProperty.call(texts, block.id) ? texts[block.id] : block.text;
+    }
+
+    function fitNote(field) {
+      field.style.height = "auto";
+      field.style.height = field.scrollHeight + "px";
+    }
+
+    function bucketOf(block, role) {
+      if (role === "secondary") return secondary[block.id] || "";
+      return placed[block.id] || "";
+    }
+
+    function inBucket(block, bucketId) {
+      if (removed[block.id]) return false;
+      if ((placed[block.id] || "") === bucketId) return true;
+      return (secondary[block.id] || "") === bucketId && (placed[block.id] || "") !== bucketId;
+    }
+
+    function colorForBlock(block, role) {
+      const bucketId = bucketOf(block, role);
       const family = FAMILIES[bucketId] || FAMILIES[""];
-      const mates = allBlocks().filter(function (item) {
-        return !removed[item.id] && (placed[item.id] || "") === bucketId;
-      });
+      const mates = allBlocks().filter(function (item) { return inBucket(item, bucketId); });
       const index = mates.findIndex(function (item) { return item.id === block.id; });
       return family.shades[Math.max(index, 0) % family.shades.length];
     }
@@ -514,20 +593,21 @@
       return list;
     }
 
-    function makeChip(block) {
+    function makeChip(block, role) {
       const name = (labels[block.id] || "").trim() || "Untitled";
+      const starred = role === "secondary";
       const chip = document.createElement("a");
       chip.className = "chip";
       chip.href = "#" + block.id;
       chip.draggable = true;
-      chip.style.background = colorForBlock(block);
+      chip.style.background = colorForBlock(block, role);
       const pid = document.createElement("span");
       pid.className = "pid";
       pid.textContent = block.id;
       chip.appendChild(pid);
-      chip.appendChild(document.createTextNode(name));
+      chip.appendChild(document.createTextNode(starred ? name + " *" : name));
       chip.addEventListener("dragstart", function (event) {
-        event.dataTransfer.setData("text/plain", block.id);
+        event.dataTransfer.setData("text/plain", block.id + (starred ? "|secondary" : ""));
         event.dataTransfer.effectAllowed = "move";
       });
       chip.addEventListener("click", function (event) {
@@ -553,9 +633,17 @@
       zone.addEventListener("drop", function (event) {
         event.preventDefault();
         zone.classList.remove("over");
-        const id = event.dataTransfer.getData("text/plain");
+        const raw = event.dataTransfer.getData("text/plain");
+        const parts = raw.split("|");
+        const id = parts[0];
+        const which = parts[1] || "primary";
         if (!id || !placed.hasOwnProperty(id)) return;
-        placed[id] = bucketId;
+        if (which === "secondary") {
+          secondary[id] = !bucketId || bucketId === (placed[id] || "") ? "" : bucketId;
+        } else {
+          placed[id] = bucketId;
+          if ((secondary[id] || "") === bucketId) secondary[id] = "";
+        }
         save();
         render();
       });
@@ -579,7 +667,7 @@
         hint.textContent = "Drag a tag here to take it out of a bucket.";
         tray.appendChild(hint);
       }
-      loose.forEach(function (block) { tray.appendChild(makeChip(block)); });
+      loose.forEach(function (block) { tray.appendChild(makeChip(block, "primary")); });
       wireZone(tray, "");
       board.appendChild(tray);
 
@@ -595,13 +683,17 @@
         title.style.color = family.ink;
         zone.appendChild(title);
         const inside = blocks.filter(function (block) { return placed[block.id] === bucket.id; });
-        if (!inside.length) {
+        const extra = blocks.filter(function (block) {
+          return (secondary[block.id] || "") === bucket.id && placed[block.id] !== bucket.id;
+        });
+        if (!inside.length && !extra.length) {
           const hint = document.createElement("p");
           hint.className = "hint";
           hint.textContent = "Drop tags here.";
           zone.appendChild(hint);
         }
-        inside.forEach(function (block) { zone.appendChild(makeChip(block)); });
+        inside.forEach(function (block) { zone.appendChild(makeChip(block, "primary")); });
+        extra.forEach(function (block) { zone.appendChild(makeChip(block, "secondary")); });
         wireZone(zone, bucket.id);
         board.appendChild(zone);
       });
@@ -624,7 +716,7 @@
         wrap.appendChild(h2);
         visible.forEach(function (block) {
           const name = labels[block.id] || "";
-          const color = colorForBlock(block);
+          const color = colorForBlock(block, "primary");
           const article = document.createElement("article");
           article.id = block.id;
           article.style.borderLeftColor = color;
@@ -650,28 +742,60 @@
             }
           });
           input.dataset.id = block.id;
+          function fillBucketSelect(select, blankLabel) {
+            [{ id: "", label: blankLabel }].concat(BUCKETS).forEach(function (bucket) {
+              const option = document.createElement("option");
+              option.value = bucket.id;
+              option.textContent = bucket.label;
+              select.appendChild(option);
+            });
+          }
+          const primaryField = document.createElement("label");
+          primaryField.className = "bucket-field";
+          const primaryCaption = document.createElement("span");
+          primaryCaption.textContent = "Primary";
           const where = document.createElement("select");
           where.className = "bucket-select";
-          where.setAttribute("aria-label", "Bucket for " + block.id);
+          where.setAttribute("aria-label", "Primary bucket for " + block.id);
           where.dataset.bucketFor = block.id;
-          [{ id: "", label: "Not placed" }].concat(BUCKETS).forEach(function (bucket) {
-            const option = document.createElement("option");
-            option.value = bucket.id;
-            option.textContent = bucket.label;
-            where.appendChild(option);
-          });
+          fillBucketSelect(where, "Not placed");
           where.value = placed[block.id] || "";
           where.addEventListener("change", function () {
             const y = window.scrollY;
             placed[block.id] = where.value;
+            if ((secondary[block.id] || "") === where.value) secondary[block.id] = "";
             save();
             render();
             window.scrollTo(0, y);
             const again = document.querySelector('[data-bucket-for="' + block.id + '"]');
             if (again) again.focus();
           });
+          primaryField.appendChild(primaryCaption);
+          primaryField.appendChild(where);
+          const secondaryField = document.createElement("label");
+          secondaryField.className = "bucket-field";
+          const secondaryCaption = document.createElement("span");
+          secondaryCaption.textContent = "Secondary";
+          const also = document.createElement("select");
+          also.className = "bucket-select secondary";
+          also.setAttribute("aria-label", "Secondary bucket for " + block.id);
+          also.dataset.secondaryFor = block.id;
+          fillBucketSelect(also, "None");
+          also.value = secondary[block.id] || "";
+          also.addEventListener("change", function () {
+            const y = window.scrollY;
+            secondary[block.id] = also.value && also.value !== (placed[block.id] || "") ? also.value : "";
+            save();
+            render();
+            window.scrollTo(0, y);
+            const again = document.querySelector('[data-secondary-for="' + block.id + '"]');
+            if (again) again.focus();
+          });
+          secondaryField.appendChild(secondaryCaption);
+          secondaryField.appendChild(also);
           row.appendChild(input);
-          row.appendChild(where);
+          row.appendChild(primaryField);
+          row.appendChild(secondaryField);
           const remove = document.createElement("button");
           remove.type = "button";
           remove.className = "remove-note";
@@ -686,15 +810,22 @@
             window.scrollTo(0, y);
           });
           row.appendChild(remove);
-          const text = document.createElement("p");
+          const text = document.createElement("textarea");
           text.className = "text";
-          text.textContent = block.text;
+          text.value = noteBody(block);
+          text.setAttribute("aria-label", "Note text for " + block.id);
+          text.addEventListener("input", function () {
+            texts[block.id] = text.value;
+            save();
+            fitNote(text);
+          });
           article.appendChild(row);
           article.appendChild(text);
           wrap.appendChild(article);
           if (seen.indexOf(keyOf(name) || "untitled") === -1) seen.push(keyOf(name) || "untitled");
         });
         doc.appendChild(wrap);
+        wrap.querySelectorAll("textarea.text").forEach(fitNote);
       });
 
       const named = {};
@@ -714,7 +845,7 @@
         const sample = allBlocks().find(function (block) {
           return (keyOf(labels[block.id]) || "untitled") === key;
         });
-        swatch.style.background = sample ? colorForBlock(sample) : FAMILIES[""].shades[0];
+        swatch.style.background = sample ? colorForBlock(sample, "primary") : FAMILIES[""].shades[0];
         button.appendChild(swatch);
         button.appendChild(document.createTextNode(named[key]));
         button.addEventListener("click", function () {
@@ -739,7 +870,7 @@
 
     document.getElementById("meta").textContent = "Source file: notes/" + SOURCE;
     document.getElementById("reset").addEventListener("click", function () {
-      if (!confirm("Reset subtopic names, colors, bucket placement, and removed notes to the first pass?")) return;
+      if (!confirm("Reset subtopic names, note text, colors, primary and secondary buckets, and removed notes to the first pass?")) return;
       localStorage.removeItem(STORAGE_KEY);
       load();
       render();

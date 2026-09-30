@@ -16,7 +16,7 @@ window.INTERVIEWS = [
     title: "BWS",
     date: "",
     href: "BWS_index.html",
-    noteCount: 56,
+    noteCount: 26,
     idPrefix: "bws",
     source: "notes/BWS .docx"
   }
