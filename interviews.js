@@ -5,9 +5,10 @@
 window.INTERVIEWS = [
   {
     id: "tulba",
-    title: "Meeting with CM Tulba",
+    title: "CM Tulba",
     date: "Dec 2025",
-    href: "board.html",
+    href: "tulba_index.html",
+    storageKey: "tulba-buckets-v1",
     noteCount: 26,
     idPrefix: "tulba",
     source: "notes/CM Tulba DPP .docx"
@@ -17,9 +18,20 @@ window.INTERVIEWS = [
     title: "BWS",
     date: "Nov 25",
     href: "BWS_index.html",
+    storageKey: "bws-buckets-v3",
     noteCount: 26,
     idPrefix: "bws",
     source: "notes/BWS .docx"
+  },
+  {
+    id: "dem",
+    title: "DEM",
+    date: "Nov 6, 2026",
+    href: "DEM_index.html",
+    storageKey: "dem-buckets-v1",
+    noteCount: 32,
+    idPrefix: "dem",
+    source: "notes/DEM .docx"
   }
 ];
 
@@ -45,4 +57,33 @@ window.saveInterviewDate = function (id, value) {
   const overrides = readDateOverrides();
   overrides[id] = value;
   localStorage.setItem(window.INTERVIEW_DATE_KEY, JSON.stringify(overrides));
+};
+
+window.INTERVIEW_ANALYSIS_KEY = "interview-analysis-v1";
+
+function readAnalysisSelection() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(window.INTERVIEW_ANALYSIS_KEY) || "{}");
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch (e) {
+    return {};
+  }
+}
+
+window.interviewIncluded = function (id) {
+  const saved = readAnalysisSelection();
+  if (Object.prototype.hasOwnProperty.call(saved, id)) return !!saved[id];
+  return true;
+};
+
+window.saveInterviewIncluded = function (id, included) {
+  const saved = readAnalysisSelection();
+  saved[id] = !!included;
+  localStorage.setItem(window.INTERVIEW_ANALYSIS_KEY, JSON.stringify(saved));
+};
+
+window.interviewsForAnalysis = function () {
+  return (window.INTERVIEWS || []).filter(function (item) {
+    return window.interviewIncluded(item.id);
+  });
 };

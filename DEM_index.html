@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BWS notes</title>
+  <title>DEM notes</title>
   <style>
     :root {
       --navy: #2b3990;
@@ -290,7 +290,7 @@
     <div class="header-brand">
       <img class="logo" src="assets/ewa-dp-logo.png" alt="ʻEwa Development Plan">
       <div class="header-text">
-        <h1>BWS</h1>
+        <h1>DEM</h1>
         <p class="date-row">Date <span class="date-value" id="meeting-date"></span> <a href="interview_notes_home.html">All interviews</a></p>
       </div>
     </div>
@@ -302,7 +302,7 @@
   </main>
   <script src="interviews.js"></script>
   <script>
-    const INTERVIEW_ID = "bws";
+    const INTERVIEW_ID = "dem";
     const FAMILIES = {
       infrastructure: { wash: "#fff3e8", ink: "#8a4b12", shades: ["#ffd7ad", "#ffc894", "#ffb878", "#ffe6cc"] },
       "land-use": { wash: "#f6f0ff", ink: "#5b3d91", shades: ["#e3d4ff", "#d4c2fb", "#c9b6f6", "#efe6ff"] },
@@ -315,7 +315,7 @@
       other: { wash: "#f4f4f6", ink: "#3d4454", shades: ["#d9dde8", "#c8cedc", "#b7c0d2", "#e6e9f0"] },
       "": { wash: "#fff8e8", ink: "#5e584f", shades: ["#efeae2", "#e7e0d4", "#f6f1e8", "#e4ddd2"] }
     };
-    const STORAGE_KEY = "bws-buckets-v3";
+    const STORAGE_KEY = "dem-buckets-v1";
     const BUCKETS = [
       { id: "infrastructure", label: "Infrastructure" },
       { id: "land-use", label: "Land use urban form" },
@@ -328,139 +328,151 @@
       { id: "other", label: "Other suggestions" }
     ];
     const START_BUCKET = {
-      "bws-01": "infrastructure",
-      "bws-02": "infrastructure",
-      "bws-03": "sustainability",
-      "bws-04": "sustainability",
-      "bws-05": "land-use",
-      "bws-06": "land-use",
-      "bws-07": "sustainability",
-      "bws-08": "sustainability",
-      "bws-09": "sustainability",
-      "bws-10": "infrastructure",
-      "bws-11": "sustainability",
-      "bws-12": "infrastructure",
-      "bws-13": "infrastructure",
-      "bws-14": "infrastructure",
-      "bws-15": "sustainability",
-      "bws-16": "sustainability",
-      "bws-17": "sustainability",
-      "bws-18": "infrastructure",
-      "bws-19": "infrastructure",
-      "bws-20": "infrastructure",
-      "bws-21": "infrastructure",
-      "bws-22": "land-use",
-      "bws-23": "other",
-      "bws-24": "infrastructure",
-      "bws-25": "land-use",
-      "bws-26": "land-use"
+      "dem-01": "sustainability",
+      "dem-02": "sustainability",
+      "dem-03": "sustainability",
+      "dem-04": "other",
+      "dem-05": "sustainability",
+      "dem-06": "transport",
+      "dem-07": "transport",
+      "dem-08": "land-use",
+      "dem-09": "sustainability",
+      "dem-10": "land-use",
+      "dem-11": "other",
+      "dem-12": "transport",
+      "dem-13": "transport",
+      "dem-14": "transport",
+      "dem-15": "transport",
+      "dem-16": "transport",
+      "dem-17": "other",
+      "dem-18": "infrastructure",
+      "dem-19": "healthy",
+      "dem-20": "transport",
+      "dem-21": "healthy",
+      "dem-22": "sustainability",
+      "dem-23": "sustainability",
+      "dem-24": "healthy",
+      "dem-25": "healthy",
+      "dem-26": "sustainability",
+      "dem-27": "sustainability",
+      "dem-28": "transport",
+      "dem-29": "transport",
+      "dem-30": "sustainability",
+      "dem-31": "sustainability",
+      "dem-32": "healthy"
     };
 
     const START_SECONDARY = {
-      "bws-01": "sustainability",
-      "bws-02": "land-use",
-      "bws-03": "infrastructure",
-      "bws-04": "infrastructure",
-      "bws-05": "sustainability",
-      "bws-06": "sustainability",
-      "bws-07": "land-use",
-      "bws-08": "infrastructure",
-      "bws-09": "land-use",
-      "bws-10": "sustainability",
-      "bws-11": "land-use",
-      "bws-12": "sustainability",
-      "bws-13": "sustainability",
-      "bws-14": "sustainability",
-      "bws-15": "infrastructure",
-      "bws-16": "econ",
-      "bws-17": "infrastructure",
-      "bws-18": "sustainability",
-      "bws-20": "land-use",
-      "bws-21": "land-use",
-      "bws-22": "sustainability",
-      "bws-23": "land-use",
-      "bws-24": "sustainability",
-      "bws-25": "infrastructure",
-      "bws-26": "infrastructure"
+      "dem-01": "healthy",
+      "dem-02": "land-use",
+      "dem-03": "land-use",
+      "dem-04": "land-use",
+      "dem-05": "healthy",
+      "dem-06": "infrastructure",
+      "dem-07": "infrastructure",
+      "dem-08": "sustainability",
+      "dem-09": "land-use",
+      "dem-10": "other",
+      "dem-11": "healthy",
+      "dem-12": "infrastructure",
+      "dem-13": "land-use",
+      "dem-14": "infrastructure",
+      "dem-15": "other",
+      "dem-16": "healthy",
+      "dem-18": "other",
+      "dem-19": "transport",
+      "dem-20": "infrastructure",
+      "dem-21": "other",
+      "dem-22": "healthy",
+      "dem-23": "infrastructure",
+      "dem-24": "sustainability",
+      "dem-25": "sustainability",
+      "dem-26": "econ",
+      "dem-27": "econ",
+      "dem-28": "healthy",
+      "dem-29": "infrastructure",
+      "dem-30": "econ",
+      "dem-31": "econ",
+      "dem-32": "sustainability"
     };
-
 
     const START_REMOVED = {};
 
     const SECTIONS = [
       {
-        heading: "Kalaeloa water system",
+        heading: "DEM responsibility",
         blocks: [
-          { id: "b", subtopic: "Private water system", text: "Kalaeloa’s potable water is provided by the privately operated Hawaiʻi/Kalaeloa Water Company under Public Utilities Commission oversight. BWS is concerned that it could eventually inherit responsibility for Kalaeloa’s water system, similar to what occurred in the City of Kapolei." },
-          { id: "b", subtopic: "Service boundaries and capacity", text: "BWS wants to respect existing water-service boundaries but noted that the Kalaeloa system is already at or near capacity while additional subdivisions are being pursued." },
-          { id: "b", subtopic: "R-1 to free capacity", text: "Expanded use of R-1 recycled water could reduce potable-water demand and free capacity for additional development, but progress on the necessary planning and investment has been slow." },
-          { id: "b", subtopic: "Aquifer yield", text: "Kalaeloa draws from the ʻEwa-Waipahu aquifer system. Its sustainable yield may decrease over time, while the same aquifer system is also supporting water demand along the Waiʻanae Coast." },
+          { id: "b", subtopic: "Hazard mitigation and recovery", text: "Hazard mitigation long term recovery (OCCSR)" },
+          { id: "b", subtopic: "Hazard mitigation plan", text: "DEM lead: 5 yr hazard mitigation plan for FEMA recently published-> by DPP planning area " },
+          { id: "b", subtopic: "Future conditions", text: "OCCSR: future conditions " },
+          { id: "b", subtopic: "Review position", text: "Uusually in position to review" },
+          { id: "b", subtopic: "Hazard ranking", text: "Hazard ranking: wildfire, Hurricane and Tsunami" },
+          { id: "b", subtopic: "Low connectivity", text: "Low connectivity" },
+          { id: "b", subtopic: "Emergency access and traffic", text: "Long term road planning for master plans, how to evaluate emergency access route, long term traffic planning. " }
         ]
       },
       {
-        heading: "Constraints & permitting",
+        heading: "Planning process when is hazards address?",
         blocks: [
-          { id: "b", subtopic: "How much growth", text: "Limited water resources raise a fundamental community question about how much additional growth the region can support and what viable long-term water sources could serve that growth. BWS does not provide advance water commitments. For master-planned developments, formal commitments generally occur later, when impact fees are assessed." },
-          { id: "b", subtopic: "TOD and HCDA capacity", text: "Planned TOD and HCDA development may not receive sufficient additional capacity without new water sources, aggressive conservation, and expanded water reuse. BWS needs more reliable estimates of the scale and timing of TOD buildout to evaluate future water demand and infrastructure needs." },
-          { id: "b", subtopic: "Waianae Water Management Area", text: "BWS has petitioned to designate the Waiʻanae Coast, from Nānākuli to Kaʻena Point, as a Water Management Area. This would create more consistent regional management but add permitting requirements for water use." },
+          { id: "b", subtopic: "When hazards are addressed", text: "long-range planning, or project by project " },
+          { id: "b", subtopic: "Hazard prioritization", text: "DEM project: prioritization process of how many hazards that will get mitigated. " },
+          { id: "b", subtopic: "Plan is not a commitment", text: "Not necessarily a commitment behind the plan…just list what should be done. " }
         ]
       },
       {
-        heading: "Diverse water system in Ewa",
+        heading: "Civil defense",
         blocks: [
-          { id: "b", subtopic: "Diversified water system", text: "ʻEwa needs a diversified water system that combines potable water, recycled water, conservation, greywater reuse, and other on-site systems." },
-          { id: "b", subtopic: "How far to require R-1", text: "Determining how extensively R-1 water should be required for irrigation and other nonpotable uses is an important planning and policy decision." },
-          { id: "b", subtopic: "R-1 capacity and connection", text: "R-1 water has available capacity and can be used to irrigate crops, but the regional distribution system is not yet fully connected. Planned R-1 extensions could serve areas such as UH West Oʻahu, Kalaeloa, Grace Pacific lands, Laulani, and other master-planned communities." },
-          { id: "b", subtopic: "On-site reuse", text: "New developments should incorporate on-site reuse, conservation, and other measures that reduce dependence on potable water." },
-          { id: "b", subtopic: "Centralized reuse system", text: "BWS supports a more centralized system that collects and treats water and then distributes it for reuse where appropriate." },
-          { id: "b", subtopic: "Wastewater collection integrity", text: "BWS is coordinating with ENV on wastewater collection-system integrity because the wastewater system is an important part of the region’s overall water-resource strategy." },
+          { id: "b", subtopic: "Civil defense coordinator", text: "DEM= civil defense, acts as coordinator among agencies like DTS, HPD, HFD, and private owners." },
+          { id: "b", subtopic: "Private road access", text: "Private road, maintain MOU, what type of hazard use it for. Trying to put together a working group to address ingress/egress issues" },
+          { id: "b", subtopic: "Future planning is DTS", text: "Future planning, DTS responsibility. DEM not making these decisions, only know area or risk. " },
+          { id: "b", subtopic: "DOT emergency roads", text: "Coordination with Hawaii DOT, past didn’t coordinate with emergency road. " },
+          { id: "b", subtopic: "Emergency planner at DOT", text: "A new emergency planner was added at DOT.On paper: DEM, military, HiEMA  (HiEMA is the state version of DEM)Request road emergency. Reality, DOT called and DEM provide input. " },
+          { id: "b", subtopic: "HPD traffic enforcement", text: "Need HPD enforcement to direct traffic. " }
         ]
       },
       {
-        heading: "Water demand",
+        heading: "Operation center basement",
         blocks: [
-          { id: "b", subtopic: "Watershed Management Plan", text: "BWS’s ʻEwa Watershed Management Plan update was set aside approximately eight years ago and still needs to be completed. BWS intends to resume the work and coordinate it with the ʻEwa Development Plan update." },
-          { id: "b", subtopic: "Sea-level rise and salinity", text: "Water planning should address sea-level-rise and salinity risks, including the possibility of seawater entering wastewater infrastructure and affecting future recycled-water supplies." },
-          { id: "b", subtopic: "Use less, pay less", text: "BWS and ENV are promoting a “use less, pay less” approach and encouraging conservation through programs such as the Water Sensible rebate program." },
-          { id: "b", subtopic: "PFAS in reverse osmosis", text: "PFAS in reverse-osmosis recycled water—not R-1 recycled water—may limit where that water can be used." },
-          { id: "b", subtopic: "More treatment capacity", text: "Additional treatment capacity and facilities may be needed to meet the region’s long-term water demand and water-quality requirements." },
+          { id: "b", subtopic: "Island-wide plans", text: "Plans? Island-wide" },
+          { id: "b", subtopic: "Emergency Operations Center", text: "DEM’s Emergency Operations Center is in the Fasi building basement; operations are island-wide." },
+          { id: "b", subtopic: "Police and Fire plans", text: "Police and Fire have their own detailed response and roadblock plans; DEM coordinates." },
+          { id: "b", subtopic: "Joint Traffic Management Center", text: "EOC doesn’t have a presence at JTMC (Joint Traffic Management Center), due to cost cuts. Is usually in a supporting role in major incidents and joins the other agencies at the JTMC when the “bridge is activated” (multi-agency gathering space for incident command)." },
+          { id: "b", subtopic: "Incident command", text: "During large incidents Fire or Police serve as Incident Commanders. " }
         ]
       },
       {
-        heading: "Cost sharing",
+        heading: "Evacuation challenges",
         blocks: [
-          { id: "b", subtopic: "Water system backbone", text: "Major water-system infrastructure includes backbone components such as wells, treatment facilities, storage, and transmission mains." },
-          { id: "b", subtopic: "Connection fees and backbone", text: "Smaller developments generally pay connection fees, while larger master-planned developments may be required to construct portions of the water-system backbone through the development-review process." },
-          { id: "b", subtopic: "Shared funding", text: "Water-capacity issues cannot be resolved solely by BWS or the City. State agencies and private developers should help fund regional backbone infrastructure, particularly because BWS relies primarily on customer rates and the State may be land-rich but funding-constrained." },
+          { id: "b", subtopic: "Tsunami risk", text: "Tsunami risk is high. " },
+          { id: "b", subtopic: "Retrofit cost", text: "Retrofitting need lot of money, things are not built to a higher standard. Make us all vulnerable. " },
+          { id: "b", subtopic: "Hurricane shelter", text: "0 hurricane shelter. Hurricane refuge area, not built to hurricane standard. Covers less than 10% of the population can fit. " },
+          { id: "b", subtopic: "Shelter-in-place", text: "Shelter-in-place" }
         ]
       },
       {
-        heading: "Plans integration",
+        heading: "Improvement and mitigation",
         blocks: [
-          { id: "b", subtopic: "Plans in tandem", text: "The ʻEwa Development Plan and the ʻEwa Watershed Management Plan should be updated in tandem so that land-use policies are directly connected to water availability, watershed conditions, infrastructure capacity, conservation, and reuse." },
-          { id: "b", subtopic: "One Water in the Plan", text: "One Water principles should be embedded throughout the ʻEwa Development Plan, including its objectives, policies, and implementation actions." },
+          { id: "b", subtopic: "Fire-resistant homes", text: "Kauai’s recent fire-resistant cost analysis, more fire resilient homes. " },
+          { id: "b", subtopic: "Resilient standards study", text: "Suggestion to study cost-benefit of resilient standards (fire, hurricane) for future policies" }
         ]
       },
       {
-        heading: "Desalination plant",
+        heading: "Ewa DP focus",
         blocks: [
-          { id: "b", subtopic: "Desalination plant", text: "BWS supports advancing the proposed desalination plant and would like it to become operational within approximately two to three years. It could provide a new water source considerably sooner than new groundwater wells." },
+          { id: "b", subtopic: "Community education and access", text: "Community education, opportunity, not to recreate the same problem wait to be retrofitted: have access road." },
+          { id: "b", subtopic: "Makakilo Access Road", text: "Makakilo Access Road MOA state agencies signed." },
+          { id: "b", subtopic: "Hardened home standards", text: "Need better standards for how hardened homes are to hazards. Prevention is better than response. However, competing interest with keeping housing costs as low as possible. " },
+          { id: "b", subtopic: "Low-cost high-benefit retrofits", text: "One angle EDP could take would be to promote the lowest cost and highest benefit retrofits and hazard mitigation features for new housing." },
+          { id: "b", subtopic: "Hardening and shelter in place", text: "Hardening homes is especially important because the City’s emergency management plans focus on sheltering in place. There are no facilities being built or designated as shelters, only refuges of last resort." }
         ]
-      },
-      {
-        heading: "Fire risk",
-        blocks: [
-          { id: "b", subtopic: "Wildfire exposure", text: "ʻEwa has substantial wildfire exposure, particularly in Makakilo and other areas along the wildland-urban interface. Water systems cannot reasonably be designed to suppress major wildland fires, so land-use and site-design measures must also reduce risk." },
-          { id: "b", subtopic: "Fire protection and Firewise", text: "Higher-density areas, including TOD districts, should be evaluated for appropriate fire-protection standards, building spacing, and infrastructure capacity. Firewise Communities standards may provide useful guidance for development near the wildland-urban interface." },
-        ]
-      },
+      }
     ];
 
     (function numberItems() {
       let n = 1;
       SECTIONS.forEach(function (section) {
         section.blocks.forEach(function (block) {
-          block.id = "bws-" + String(n).padStart(2, "0");
+          block.id = "dem-" + String(n).padStart(2, "0");
           n += 1;
         });
       });

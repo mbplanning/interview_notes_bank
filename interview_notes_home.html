@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interview notes</title>
+  <style>
+    :root {
+      --navy: #2b3990;
+      --peach: #f5a26f;
+      --grey: #76777b;
+      --paper: #fbf8f4;
+      --ink: #1e1e22;
+      --line: #e4ddd4;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .site-header {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 0.85rem 1.25rem;
+      border-bottom: 3px solid var(--navy);
+      background: #fff;
+    }
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      min-width: 0;
+    }
+    .logo { height: 72px; width: auto; display: block; }
+    .header-text h1 {
+      margin: 0;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 0.01em;
+    }
+    .today-date {
+      margin: 0.25rem 0 0;
+      font-size: 0.9rem;
+      color: var(--grey);
+    }
+    .page { padding: 1.1rem 1.25rem 2rem; }
+    .news-heading {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.55rem 1rem;
+      margin: 0 0 0.7rem;
+    }
+    .news-heading h2,
+    .buckets h2 {
+      margin: 0;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--grey);
+      border-bottom: 2px solid var(--peach);
+      display: inline-block;
+      padding-bottom: 0.2rem;
+    }
+    .news-search-label {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex: 1 1 14rem;
+      margin: 0;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+    #q {
+      flex: 1 1 auto;
+      min-width: 10rem;
+      font: inherit;
+      font-size: 0.88rem;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+      padding: 0.4rem 0.55rem;
+      border: 1px solid var(--navy);
+      color: var(--ink);
+      background: #fff;
+    }
+    .count { font-size: 0.78rem; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--grey); }
+    .list {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: stretch;
+      gap: 0.75rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .meeting { margin: 0; padding: 0; }
+    .meeting-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      min-height: 2.75rem;
+      padding: 0.45rem 1rem 0.45rem 0.7rem;
+      border: 2px solid var(--navy);
+      background: #fff;
+    }
+    .meeting-btn.is-off { border-color: #c8c4bc; }
+    .include {
+      display: inline-flex;
+      align-items: center;
+      margin: 0;
+    }
+    .include input {
+      width: 1.05rem;
+      height: 1.05rem;
+      margin: 0;
+      accent-color: var(--navy);
+    }
+    .headline {
+      color: var(--navy);
+      font-size: 0.98rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .meeting-btn.is-off .headline { color: var(--grey); }
+    .headline:hover,
+    .headline:focus { text-decoration: underline; }
+    .analysis-count {
+      margin: 0.75rem 0 0;
+      font-size: 0.88rem;
+      color: var(--ink);
+    }
+    .empty { color: var(--grey); font-size: 0.88rem; }
+    .board-heading {
+      margin: 1.4rem 0 0.7rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--grey);
+      border-bottom: 2px solid var(--peach);
+      display: inline-block;
+      padding-bottom: 0.2rem;
+    }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0;
+    }
+    .zone {
+      min-height: 132px;
+      background: #fff;
+      border: 2px dashed var(--line);
+      padding: 10px;
+    }
+    .zone.tray {
+      grid-column: 2 / span 3;
+      grid-row: 3;
+      background: #fff8e8;
+    }
+    .zone[data-bucket="other"] {
+      grid-column: 1;
+      grid-row: 3;
+    }
+    .zone h3 { margin: 0 0 8px; font-size: 16px; }
+    .chip {
+      display: inline-block;
+      margin: 0 6px 6px 0;
+      padding: 4px 8px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: #fff;
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .chip:hover { text-decoration: underline; }
+    @media (max-width: 900px) {
+      .board { grid-template-columns: 1fr 1fr; }
+      .zone.tray,
+      .zone[data-bucket="other"] {
+        grid-column: auto;
+        grid-row: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-brand">
+      <img class="logo" src="assets/ewa-dp-logo.png" alt="ʻEwa Development Plan">
+      <div class="header-text">
+        <h1>Interview notes</h1>
+        <p class="today-date">Each meeting is its own page. Open a meeting to read the notes and sort them into topic buckets.</p>
+      </div>
+    </div>
+  </header>
+  <main class="page">
+    <div class="news-heading">
+      <h2>Meetings</h2>
+      <label class="news-search-label">
+        Search
+        <input id="q" type="search" placeholder="Titles and dates" aria-label="Find a meeting">
+        <span class="count" id="count"></span>
+      </label>
+    </div>
+    <ul class="list" id="list"></ul>
+    <p class="analysis-count" id="analysis-count"></p>
+    <p class="empty" id="empty" hidden>No meetings match that search.</p>
+    <h2 class="board-heading">Buckets</h2>
+    <div class="board" id="board"></div>
+  </main>
+  <script src="interviews.js"></script>
+  <script src="note_placements.js"></script>
+  <script>
+    const list = document.getElementById("list");
+    const count = document.getElementById("count");
+    const analysisCount = document.getElementById("analysis-count");
+    const empty = document.getElementById("empty");
+    const q = document.getElementById("q");
+    const meetings = Array.isArray(window.INTERVIEWS) ? window.INTERVIEWS : [];
+
+    function updateAnalysisCount() {
+      const included = window.interviewsForAnalysis().length;
+      const total = meetings.length;
+      analysisCount.textContent = included + " of " + total + " selected for analysis";
+    }
+
+    function show(items) {
+      list.replaceChildren();
+      items.forEach((item) => {
+        const name = item.title || item.id;
+        const included = window.interviewIncluded(item.id);
+        const li = document.createElement("li");
+        li.className = "meeting";
+        const box = document.createElement("div");
+        box.className = "meeting-btn" + (included ? "" : " is-off");
+        const label = document.createElement("label");
+        label.className = "include";
+        const boxInput = document.createElement("input");
+        boxInput.type = "checkbox";
+        boxInput.checked = included;
+        boxInput.setAttribute("aria-label", "Include " + name + " in the analysis");
+        boxInput.addEventListener("change", function () {
+          window.saveInterviewIncluded(item.id, boxInput.checked);
+          box.classList.toggle("is-off", !boxInput.checked);
+          updateAnalysisCount();
+          renderBoard();
+        });
+        label.append(boxInput);
+        const a = document.createElement("a");
+        a.className = "headline";
+        a.href = item.href;
+        a.textContent = name;
+        box.append(label, a);
+        li.append(box);
+        list.append(li);
+      });
+      const total = meetings.length;
+      const shown = items.length;
+      count.textContent = shown === total
+        ? total + (total === 1 ? " meeting" : " meetings")
+        : shown + " of " + total;
+      updateAnalysisCount();
+      empty.hidden = shown !== 0;
+    }
+
+    function matches(item, text) {
+      const hay = [item.title, window.interviewDate(item.id), item.id, item.idPrefix, item.source].join(" ").toLowerCase();
+      return hay.includes(text);
+    }
+
+    q.addEventListener("input", () => {
+      const text = q.value.trim().toLowerCase();
+      show(text ? meetings.filter((item) => matches(item, text)) : meetings);
+    });
+
+    show(meetings);
+
+    const FAMILIES = {
+      infrastructure: { wash: "#fff3e8", ink: "#8a4b12" },
+      "land-use": { wash: "#f6f0ff", ink: "#5b3d91" },
+      transport: { wash: "#eef5ff", ink: "#1d4e89" },
+      econ: { wash: "#fff8e4", ink: "#8a6a10" },
+      sustainability: { wash: "#eefaf6", ink: "#0f6b5c" },
+      healthy: { wash: "#fff0f5", ink: "#8a3050" },
+      cultural: { wash: "#fbf3ee", ink: "#7a4632" },
+      parks: { wash: "#f1faf0", ink: "#2d6b32" },
+      other: { wash: "#f4f4f6", ink: "#3d4454" },
+      "": { wash: "#fff8e8", ink: "#5e584f" }
+    };
+    const BUCKETS = [
+      { id: "infrastructure", label: "Infrastructure" },
+      { id: "land-use", label: "Land use urban form" },
+      { id: "transport", label: "Transport mobility" },
+      { id: "econ", label: "Econ business" },
+      { id: "sustainability", label: "Sustainability" },
+      { id: "healthy", label: "Healthy communities" },
+      { id: "cultural", label: "Cultural and historical resources" },
+      { id: "parks", label: "Parks and open space" },
+      { id: "other", label: "Other suggestions" }
+    ];
+
+    function notesFor(interview) {
+      const base = (window.NOTE_PLACEMENTS && window.NOTE_PLACEMENTS[interview.id]) || [];
+      const placed = {};
+      const secondary = {};
+      const removed = {};
+      base.forEach(function (note) {
+        placed[note.id] = note.bucket || "";
+        secondary[note.id] = note.secondary || "";
+      });
+      try {
+        const saved = JSON.parse(localStorage.getItem(interview.storageKey) || "null");
+        if (saved && saved.placed) Object.assign(placed, saved.placed);
+        if (saved && saved.secondary) Object.assign(secondary, saved.secondary);
+        if (saved && saved.removed) Object.assign(removed, saved.removed);
+      } catch (err) {
+        /* keep the saved page placements */
+      }
+      return base.filter(function (note) {
+        return !removed[note.id];
+      }).map(function (note) {
+        const bucket = placed[note.id] || "";
+        const also = secondary[note.id] || "";
+        return {
+          id: note.id,
+          href: interview.href + "#" + note.id,
+          bucket: bucket,
+          secondary: also && also !== bucket ? also : ""
+        };
+      });
+    }
+
+    function chip(note, starred) {
+      const link = document.createElement("a");
+      link.className = "chip";
+      link.href = note.href;
+      link.textContent = note.id + (starred ? " *" : "");
+      return link;
+    }
+
+    function renderBoard() {
+      const board = document.getElementById("board");
+      const notes = window.interviewsForAnalysis().flatMap(notesFor);
+      board.replaceChildren();
+
+      function zone(bucketId, label, tray) {
+        const box = document.createElement("div");
+        box.className = "zone" + (tray ? " tray" : "");
+        box.dataset.bucket = bucketId;
+        const family = FAMILIES[bucketId] || FAMILIES[""];
+        box.style.background = family.wash;
+        const title = document.createElement("h3");
+        title.textContent = label;
+        title.style.color = family.ink;
+        box.appendChild(title);
+        notes.forEach(function (note) {
+          if ((note.bucket || "") === bucketId) box.appendChild(chip(note, false));
+        });
+        if (bucketId) {
+          notes.forEach(function (note) {
+            if (note.secondary === bucketId) box.appendChild(chip(note, true));
+          });
+        }
+        return box;
+      }
+
+      board.appendChild(zone("", "Not placed", true));
+      BUCKETS.forEach(function (bucket) {
+        board.appendChild(zone(bucket.id, bucket.label, false));
+      });
+    }
+
+    renderBoard();
+  </script>
+</body>
+</html>
